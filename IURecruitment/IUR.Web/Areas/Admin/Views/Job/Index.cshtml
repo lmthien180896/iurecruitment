@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Job";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section script{   
+    <script src="/assets/admin/js/controller/jobController.js"></script>
+    <script>
+        var txtDescription = CKEDITOR.replace('txtJobDescription', {
+            customConfig: '/assets/admin/js/plugins/ckeditor/config.js',
+        });
+        var txtRequirement = CKEDITOR.replace('txtRequirement', {
+            customConfig: '/assets/admin/js/plugins/ckeditor/config.js',
+        });
+    </script>
+}
+
+<div class="title-addnew">
+    <h3 class="section-title-lg">Manage Jobs</h3>
+    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <a class="btn btn-danger" id="btnDeleteAll" style="color: white;" href="#"><i class="fa fa-trash"></i> Delete All</a>
+        <a class="btn btn-success pull-right" id="btnAdd" style="color: white;" href="#" data-toggle="modal" data-target="#modalAddOrUpdate"><i class="fa fa-plus-circle"></i> Add Department</a>
+    </div>
+</div>
+<div class="table-responsive">
+    <input type="hidden" id="txtSortItem"/>
+    <table class="table table-hover">
+        <thead>
+            <tr class="bg-dark">
+                <th style="width: 5%"><input type="checkbox" id="chkAll" /></th>
+                <th scope="col" style="width: 5%">#</th>
+                <th scope="col" style="width: 20%"><a href="#" class="sort-table" id="btnPosition">Position</a></th>
+                <th scope="col" style="width: 30%"><a href="#" class="sort-table" id="btnDepartment">Department</a></th>
+                <th scope="col" style="width: 15%"><a href="#" class="sort-table" id="btnPostedDate">Posted Date</a></th>
+                <th scope="col" style="width: 10%">Deadline</th>
+                <th scope="col" style="width: 10%">Status</th>
+                <th scope="col" style="width: 10%">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tblJobs"></tbody>
+    </table>
+    <div class="pagination" id="pagination"></div>
+    <script id="template" type="x-tmpl-mustache">
+        <tr>
+            <td><input type="checkbox" class="chkDelete" data-id={{ID}} /></td>
+            <td>{{Index}}</td>
+            <td>{{Position}}</td>
+            <td>{{Department}}</td>
+            <td>{{{PostedDate}}}</td>
+            <td>{{{Deadline}}}</td>
+            <td>{{{Status}}}</td>
+            <td class="action-icon">
+                <a href="#"><i class="fa fa-pencil fa-lg btnUpdate" data-id="{{ID}}" data-toggle="tooltip" title="Update"></i></a>
+                <a href="#"><i class="fa fa-trash fa-lg btnDelete" data-id="{{ID}}" data-toggle="tooltip" title="Delete"></i></a>
+            </td>
+        </tr>
+    </script>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalAddUpdate" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add/Update Job</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <input type="hidden" name="ID" id="txtID" />
+                    <input type="checkbox" name="Status" id="chkStatus" style="display: none" />
+                    <div class="form-group">
+
+                        <label for="txtJobTitle" class="col-sm-3 col-form-label">Job Title</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="txtJobTitle" name="JobTitle">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sltEmployeeType" class="col-sm-5 col-form-label">Employee Type</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" id="sltEmployeeType" name="EmployeeType">
+                                <option>Staff</option>
+                                <option>Lecturer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sltTimeType" class="col-sm-3 col-form-label">Time Type</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" id="sltTimeType" name="TimeType">
+                                <option>Full-time</option>
+                                <option>Part-time</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDepartment" class="col-sm-3 col-form-label">Department</label>
+                        <div class="col-sm-12">
+                            <select class="form-control" name="Department" id="sltDepartment">
+                                <option value="">--Select--</option>
+                                @foreach (var department in ViewBag.listDepartments)
+                                {
+                                    <option value="@department.ID">@department.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDeadline" class="col-sm-3 col-form-label">Deadline</label>
+                        <div class="col-sm-12">
+                            <input type="date" class="form-control" id="txtDeadline" name="Deadline">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtJobDescription" class="col-sm-3 col-form-label">Job Description</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="txtJobDescription" name="JobDescription"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtRequirement" class="col-sm-3 col-form-label">Requirement</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="txtRequirement" name="Requirement"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" id="btnSave"><i class="fa fa-save"></i> Save</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

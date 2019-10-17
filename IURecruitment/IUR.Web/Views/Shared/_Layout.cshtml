@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Assets/admin/js/plugins/fontawesome/css/font-awesome.css" rel="stylesheet" />
+    @*<link href="~/Assets/admin/js/plugins/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="~/Assets/admin/js/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Assets/admin/js/plugins/toastr/toastr.css" rel="stylesheet" />
+    <link href="~/Assets/client/css/style.css" rel="stylesheet" />
+    @RenderSection("css", required: false)
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <!--Nav bar-->
+    <nav>
+        <div class="logo">
+            <div>
+                <a href="/"><img src="~/Assets/client/img/IULogo.png" alt="Logo" /></a>
+            </div>
+            <a href="/" class="home-link"><h1>Careers</h1></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="https://hcmiu.edu.vn/">About us</a></li>
+            <li><a href="/job-listing">Job listing</a></li>
+            <li><a href="/how-to-apply">How to apply</a></li>
+            @*@if (TempData["isLogin"].ToString() == "admin")
+                {
+                    <div class="dropdown">
+                        <li class="dropdown-toggle" data-toggle="dropdown"><a href="#">Admin Functions</a></li>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/Admin/ManageJobs/Index">Manage Jobs</a>
+                            <a class="dropdown-item" href="/Admin/ManageApplications/Index">Manage Applications</a>
+                            <a class="dropdown-item" href="/Admin/ManageDepartments/Index">Manage Departments</a>
+                            <a class="dropdown-item" href="/Admin/ManageUsers/Index">Manage Users</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <li class="dropdown-toggle" data-toggle="dropdown"><a href="#">@TempData["DisplayName"]</a></li>
+                        <div class="dropdown-menu">
+                            <a href="/Admin/Login/Logout">Log out</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <li><a href="/Admin/Login">Log in</a></li>
+                }*@
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+    <!-- /// Nav bar-->
+    <div class="container">
+        <!--/Notification toastr-->
+        @if (TempData["AlertMessage"] != null)
+        {
+            <div id="toast-container" class="toast-top-right hide">
+                <div class="toast @TempData["AlertType"]" aria-live="polite" style="display: block;">
+                    <div class="toast-message">@TempData["AlertMessage"]</div>
+                </div>
+            </div>
+        }
+        <!--Intro Text-->
+        @{Html.RenderAction("IntroText", "Home", new { area = "" });}
+        <!--//Intro Text-->
+        @RenderBody()
+    </div>
+    <!--Footer-->
+    @{Html.RenderAction("Footer", "Home", new { area = "" });}
+    <!--/// Footer-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    @*<script src="https://kit.fontawesome.com/a076d05399.js"></script>*@
+    <script src="~/Assets/admin/js/plugins/bootbox.min.js"></script>
+    <script src="~/Assets/admin/js/plugins/mustache.min.js"></script>
+    <script src="~/Assets/admin/js/plugins/jquery.twbsPagination.min.js"></script>
+    <script src="~/Assets/admin/js/plugins/toastr/toastr.js"></script>
+    <script src="~/Assets/admin/js/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/Assets/client/js/applyPage.js"></script>
+    <script src="~/Assets/client/js/navbar.js"></script>
+    <script src="~/Assets/admin/js/common.js"></script>
+    @RenderSection("script", required: false)
+    @RenderSection("jquery", required: false)
+
+
+</body>
+</html>
