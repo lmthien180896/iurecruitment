@@ -140,6 +140,7 @@
     <Compile Include="Areas\Admin\Controllers\JobController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Models\LoginViewModel.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobController.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\ApplicationViewModel.cs" />
     <Compile Include="Models\DepartmentViewModel.cs" />
     <Compile Include="Models\JobListingViewModel.cs" />
     <Compile Include="Models\JobViewModel.cs" />
@@ -757,11 +759,6 @@
     <Content Include="Assets\client\img\IULogo.png" />
     <Content Include="Assets\client\js\applyPage.js" />
     <Content Include="Assets\client\js\navbar.js" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1071,10 +1068,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Assets\admin\js\plugins\toastr\.bower.json" />
     <Content Include="Assets\admin\js\plugins\toastr\bower.json" />
     <Content Include="Assets\admin\js\plugins\toastr\README.md" />
@@ -1108,12 +1101,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Footer.cshtml" />
     <Content Include="Views\Home\HowToApply.cshtml" />
     <Content Include="Views\Home\IntroText.cshtml" />
+    <Content Include="Views\Job\JobListing.cshtml" />
+    <Content Include="Views\Job\ViewJobDetail.cshtml" />
+    <Content Include="Views\Application\ApplyForm.cshtml" />
+    <Content Include="Views\Application\SubmitApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1122,7 +1117,6 @@
     <Folder Include="Assets\admin\css\" />
     <Folder Include="Assets\admin\img\" />
     <Folder Include="UploadedFiles\" />
-    <Folder Include="Views\Job\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IUR.Common\IUR.Common.csproj">

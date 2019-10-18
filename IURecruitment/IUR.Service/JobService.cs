@@ -1,4 +1,5 @@
-﻿using IUR.Data.Infrastructure;
+﻿using IUR.Common;
+using IUR.Data.Infrastructure;
 using IUR.Data.Repositories;
 using IUR.Model.Models;
 using System;
@@ -18,6 +19,10 @@ namespace IUR.Service
         Job Delete(int id);
 
         void DeleteMultiById(int id);
+
+        IEnumerable<Job> GetAllManagementAndStaffJobs();
+        IEnumerable<Job> GetAllFullTimeJobs();
+        IEnumerable<Job> GetAllPartTimeJobs();
 
         IEnumerable<Job> GetAll();
 
@@ -57,6 +62,21 @@ namespace IUR.Service
         public IEnumerable<Job> GetAll()
         {
             return _jobRepository.GetAll(new string[] { "Department" });
+        }
+
+        public IEnumerable<Job> GetAllFullTimeJobs()
+        {
+            return _jobRepository.GetMulti(x => x.TimeType == CommonConstants.Fulltime && x.Status && x.Deadline < DateTime.Now);
+        }
+
+        public IEnumerable<Job> GetAllManagementAndStaffJobs()
+        {
+            return _jobRepository.GetMulti(x => x.TimeType == CommonConstants.Parttime && x.Status && x.Deadline < DateTime.Now);
+        }
+
+        public IEnumerable<Job> GetAllPartTimeJobs()
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Job> GetAllSort(string sortItem)

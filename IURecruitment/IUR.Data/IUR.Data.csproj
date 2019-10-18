@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201910150720270_initializeDb.Designer.cs">
       <DependentUpon>201910150720270_initializeDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910180655504_editMaxLengthJobComponents.cs" />
+    <Compile Include="Migrations\201910180655504_editMaxLengthJobComponents.Designer.cs">
+      <DependentUpon>201910180655504_editMaxLengthJobComponents.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicantDetailRepository.cs" />
@@ -105,6 +109,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910150720270_initializeDb.resx">
       <DependentUpon>201910150720270_initializeDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910180655504_editMaxLengthJobComponents.resx">
+      <DependentUpon>201910180655504_editMaxLengthJobComponents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

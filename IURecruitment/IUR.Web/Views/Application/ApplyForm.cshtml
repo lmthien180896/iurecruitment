@@ -1,0 +1,388 @@
+﻿
+@{
+    ViewBag.Title = "Apply";
+}
+
+@section script{
+    <script src="~/Assets/client/js/applyPage.js"></script>
+    <script>
+        var editor = CKEDITOR.replace('txtCareerObjectives', {
+            customConfig: '~/Assets/admin/js/plugins/ckeditor/config.js',
+        });
+    </script>
+}
+
+<div class="container">
+    <div class="content">
+        <main>
+            <h3 class="section-title-lg">Application Form</h3>
+            <br />
+            <p><b>Instruction:</b></p>
+            <p>Please fill in all the requested information in English (including your résumé). Failure to provide important information will result in delay or rejection of your application. Attach a recent color photograph in the space in the bottom right hand side of this application form.</p>
+            <p>
+                International University (IU) has the right to screen all applications based on our personnel policies and reserves every right to reject any application we access unsuitable or unqualified. Only short-listed applicants will be notified of further procedure.
+            </p>
+            <hr class="hr-black" />
+
+            <!--Start form-->
+            @using (Html.BeginForm("SubmitApplication", "Application", FormMethod.Post, htmlAttributes: new { @id = "myForm", @enctype = "multipart/form-data" }))
+            {
+                <input type="hidden" name="JobID" value="@ViewBag.JobID" />
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label form-label">Applied Position:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="JobTitle" value="@ViewBag.JobName" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label form-label">Department:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Department" value="@ViewBag.Department" readonly>
+                    </div>
+                </div>
+
+                //PERSONAL INFORMATION
+                <div id="PersonalInformation">
+                    <hr class="hr-black" />
+                    <p class="section-title-md">1. PERSONAL INFORMATION</p>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Fullname:</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="Title">
+                                <option>Mr.</option>
+                                <option>Mrs.</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="txtFullname" name="Fullname" placeholder="(Example: Nguyen Van A)" required>
+                            <span id="warning-fullname" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Date of Birth:</label>
+                        <div class="col-sm-3">
+                            <input type="date" class="form-control" name="DOB" id="txtDOB" required />
+                            <span id="warning-dob" class="warning-invalidate"></span>
+                        </div>
+                        <label class="col-sm-2 col-form-label form-label">Place of Birth:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="PlaceOfBirth" id="txtPOB" placeholder="Place of Birth" required>
+                            <span id="warning-pob" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Nationality:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Nationality" placeholder="Viet Nam" id="txtNationality" />
+                            <span id="warning-nationality" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Contact Address:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ContactAddress" id="txtCAddress" />
+                            <span id="warning-caddress" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Permanent Address:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="PermanentAddress" id="txtPAddress" />
+                            <span id="warning-paddress" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Phone:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="Phone" id="txtPhone" />
+                            <span id="warning-phone" class="warning-invalidate"></span>
+                        </div>
+                        <label class="col-sm-2 col-form-label form-label">Email:</label>
+                        <div class="col-sm-5">
+                            <input type="email" class="form-control" name="Email" placeholder="(Example: abc@xyz.com)" id="txtEmail">
+                            <span id="warning-email" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Identity Card Number/Passport:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="IDCard" id="txtIDNum" />
+                            <span id="warning-idnum" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Issued On:</label>
+                        <div class="col-sm-3">
+                            <input type="date" class="form-control" name="IssuedOn" id="txtIssuedOn" />
+                            <span id="warning-issuedOn" class="warning-invalidate"></span>
+                        </div>
+                        <label class="col-sm-2 col-form-label form-label">Issued Place:</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="IssuedPlace" placeholder="" id="txtIssuedPlace">
+                            <span id="warning-issuedPlace" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-sm-2 col-form-label form-label">Photo:</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control-file txtimageFile" id="files" name="files">
+                            Browse (jpg; jpeg; png; gif), max size 1 MB.
+                        </div>
+                    </div>
+                </div>
+
+
+                //CAREER OBJECTIVES
+                <div id="CareerObjectives">
+                    <hr class="hr-black" />
+                    <p class="section-title-md">2. CAREER OBJECTIVES</p>
+                    <span id="warning-co" class="warning-invalidate"></span>
+                    <textarea id="txtCareerObjectives" name="CareerObjective" required></textarea>
+                </div>
+
+                //EDUCATION BACKGROUND
+                <div id="Background">
+                    <hr class="hr-black" />
+                    <p class="section-title-md">3. EDUCATION BACKGROUND</p>
+                    <p class="section-title-SM">3.1 BACKGROUND</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="bg-dark">
+                                    <th scope="col">Education level</th>
+                                    <th scope="col">School/University</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">Major</th>
+                                    <th scope="col">Date of graduation</th>
+                                </tr>
+                            </thead>
+                            <tbody id="CO_rows">
+                                <tr>
+                                    <td>
+                                        <select class="form-control" name="EducationBackground.Level">
+                                            <option>PhD</option>
+                                            <option>Master</option>
+                                            <option>Bachelor</option>
+                                            <option>Diploma</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" class="form-control" name="EducationBackground.School" /></td>
+                                    <td><input type="text" class="form-control" name="EducationBackground.Country" /></td>
+                                    <td><input type="text" class="form-control" name="EducationBackground.Major" /></td>
+                                    <td><input type="date" class="form-control" name="EducationBackground.GraduatedDate" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="btn btn-info" id="addEduBG"><i class="fa fa-plus"></i> Add more</a>
+                    </div>
+                    <br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="Rank.Rank" id="rank-radioBtn1" value="Assoc. Prof">
+                        <label class="form-check-label" for="inlineRadio1">Assoc. Prof</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="Rank.Rank" id="rank-radioBtn2" value="Prof">
+                        <label class="form-check-label" for="inlineRadio2">Prof</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="Rank.Rank" id="rank-radioBtn3" value="None">
+                        <label class="form-check-label" for="inlineRadio3">None</label>
+                    </div>
+                </div>
+
+                <br />
+                <p class="section-title-SM">3.2 SKILLS</p>
+
+                //LANGUAGE
+                <div id="Language">
+                    <p class="section-title-SM">3.2.1 LANGUAGE</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="bg-dark">
+                                    <th scope="col">Certificate</th>
+                                    <th scope="col">Level/Score/Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody id="language_rows">
+                                <tr>
+                                    <td>
+                                        <input type="text" name="Language.Certificate" class="form-control" placeholder="IETLS, TOELF, ..." />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="Language.Grade" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="btn btn-info" id="addLanguage"><i class="fa fa-plus"></i> Add more</a>
+                    </div>
+                </div>
+                <br />
+                //COMPUTER SKILLS
+                <div id="computer-skills">
+                    <p class="section-title-SM">3.2.2 COMPUTER SKILLS</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="bg-dark">
+                                    <th scope="col">Software</th>
+                                    <th scope="col">Level</th>
+                                </tr>
+                            </thead>
+                            <tbody id="compskill_rows">
+                                <tr>
+                                    <td>
+                                        <input type="text" name="ComputerSkill.Software" class="form-control" placeholder="Microsoft Office, Photoshop, SPSS softwares, ..." />
+                                    </td>
+                                    <td>
+                                        <select class="form-control" name="ComputerSkill.Level">
+                                            <option>Please Select</option>
+                                            <option>Basic</option>
+                                            <option>Intermediate</option>
+                                            <option>Advanced</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="btn btn-info" id="addCompskill"><i class="fa fa-plus"></i> Add more</a>
+                    </div>
+                </div>
+                <br />
+                //OTHER SKILLS
+                <div id="other-skills">
+                    <p class="section-title-SM">3.2.3 OTHER SKILLS</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="bg-dark">
+                                    <th scope="col">Skill</th>
+                                    <th scope="col">Reference</th>
+                                </tr>
+                            </thead>
+                            <tbody id="otherskill_rows">
+                                <tr>
+                                    <td>
+                                        <input type="text" name="OtherSkill.Skill" class="form-control" placeholder="Soft skills, ..." />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="OtherSkill.Reference" class="form-control" placeholder="" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="btn btn-info" id="addOtherskill"><i class="fa fa-plus"></i> Add more</a>
+                    </div>
+                </div>
+                <br />
+                //EMPLOYMENT HISTORY AND WORKING EXPERIENCE
+                <div id="EmploymentHistoryAndWorkingExperience">
+                    <hr class="hr-black" />
+                    <p class="section-title-md">4. EMPLOYMENT HISTORY AND WORKING EXPERIENCE</p>
+                    <p class="section-title-SM">4.1 EMPLOYMENT HISTORY</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="bg-dark">
+                                    <th scope="col">From</th>
+                                    <th scope="col">To</th>
+                                    <th scope="col">Organization/Company</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Reason for leaving</th>
+                                </tr>
+                            </thead>
+                            <tbody id="emhis_rows">
+                                <tr>
+                                    <td>
+                                        <input type="date" class="form-control" name="Experience.FromDate" />
+                                    </td>
+                                    <td>
+                                        <input type="date" class="form-control" name="Experience.ToDate" />
+                                    </td>
+                                    <td><input type="text" class="form-control" name="Experience.Company" /></td>
+                                    <td><input type="text" class="form-control" name="Experience.Position" /></td>
+                                    <td><textarea class="form-control" name="Experience.Description"></textarea></td>
+                                    <td><textarea class="form-control" name="Experience.Reason"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="btn btn-info" id="addEmHis"><i class="fa fa-plus"></i> Add more</a>
+                    </div>
+                    <br />
+
+                    @*EMPLOYMENT HISTORY AND WORKING EXPERIENCE*@
+                    <div id="otherquestion">
+                        <p class="section-title-SM">4.2 OTHER QUESTIONS</p>
+                        <div class="form-row">
+                            <label class="col-sm-6 col-form-label form-label">When will you be available to work:</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="OtherQuestions.Available" id="sltAvailable">
+                                    <option>Please Select</option>
+                                    <option>Immediately</option>
+                                    <option>One week later</option>
+                                    <option>One month later</option>
+                                    <option>More than one month</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-sm-6 col-form-label form-label">Have you ever applied to International University:</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="OtherQuestions.AppliedIU" id="sltAppliedIU">
+                                    <option>Please Select</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-sm-6 col-form-label form-label">How do you get informed of the recruitment:</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="OtherQuestions.Informed" id="sltInformed">
+                                    <option>Please Select</option>
+                                    <option>Internet</option>
+                                    <option>Friend/Relatives</option>
+                                    <option>Newspaper</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                //RESUME
+                <div id="Resume">
+                    <hr class="hr-black" />
+                    <p class="section-title-md">5. PERSONAL RESUME</p>
+                    <div class="form-row">
+                        <label class="col-sm-8 col-form-label">Please attach your own résumé here for further information and references (PDF only)</label>
+                        <div class="col-sm-4">
+                            <input type="file" class="form-control-file txtresumeFile" id="file" name="files">
+                            <span id="warning-resume" class="warning-invalidate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-sm-8">
+                            <p>* <b>ACKNOWLEDGEMENT</b></p>
+                            <p>By signing hereunder, you acknowledge the following conditions:</p>
+                            <ul>
+                                <li>All information provided herein must be true.</li>
+                                <li>Whenever IU finds out any false information, IU reserves the right to terminate your labor contract.</li>
+                                <li>
+                                    You agree to abide by IU’s rules and regulations concerning the recruitment.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-dark" id="btnSubmit" type="button">Submit</button>
+            }
+        </main>
+    </div>
+</div>
+
+

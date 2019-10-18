@@ -1,15 +1,11 @@
-﻿using IUR.Model.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace IUR.Web.Models
 {
     public class JobListingViewModel
     {
-        IEnumerable<Job> ManagementAndStaffJobs { get; set; } 
-        IEnumerable<Job> FulltimeJobs { get; set; } 
-        IEnumerable<Job> ParttimeJobs { get; set; } 
+        public IEnumerable<JobViewModel> ManagementAndStaffJobs { get; set; }
+        public IEnumerable<JobViewModel> FulltimeJobs { get; set; }
+        public IEnumerable<JobViewModel> ParttimeJobs { get; set; }
     }
 }

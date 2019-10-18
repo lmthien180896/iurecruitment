@@ -1,0 +1,85 @@
+﻿@model IUR.Web.Models.JobViewModel
+@{
+    ViewBag.Title = "Job Details";
+}
+
+
+<div class="content">
+    <main>
+        <h3 class="section-title-lg">Job Details</h3>
+        <table class="table job-details-table">
+            <tbody>
+                <tr>
+                    <td class="bg-primary job-label">
+                        Job Title
+                    </td>
+                    <td class="job_text">
+                        <strong>@Model.Name</strong>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td class="bg-primary job-label">
+                        Job Type
+                    </td>
+                    <td class="job_text">
+                        @Model.TimeType , @Model.EmployeeType
+                    </td>
+
+                </tr>
+
+
+                <tr>
+                    <td class="bg-primary job-label">
+                        Department
+                    </td>
+                    <td class="job_text">
+                        @Model.Department.Name
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="bg-primary job-label">
+                        Date Posted
+                    </td>
+                    <td class="job_text">
+                        @(Model.CreatedDate.HasValue ? Model.CreatedDate.Value.ToString("dd/MM/yyyy") : null)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bg-primary job-label">
+                        Job Description
+                    </td>
+                    <td class="job_text">
+                        @Html.Raw(Model.Description)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="bg-primary job-label">
+                        Requirements
+                    </td>
+                    <td class="job_text">
+                        @Html.Raw(Model.Requirement)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="bg-primary job-label">
+                        Application Deadline
+                    </td>
+                    <td class="job_text">
+                        @Model.Deadline.ToString("dd/MM/yyyy")
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <a href="/apply/job-@Model.ID" class="btn btn-info" style="float:right;">Apply</a>
+        <a href="/job-listing" class="btn btn-secondary" style="float:left;">Back to job listing</a>
+        <br />
+        <br />
+    </main>
+</div>
+

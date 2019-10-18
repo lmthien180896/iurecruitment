@@ -31,12 +31,10 @@ namespace IUR.Model.Models
         [Required]
         public int DepartmentID { get; set; }
 
-        [Required]
-        [MaxLength(256)]
+        [Required]        
         public string Description { get; set; }
 
-        [Required]
-        [MaxLength(256)]
+        [Required]        
         public string Requirement { get; set; }
 
         [Required]

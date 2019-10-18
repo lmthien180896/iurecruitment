@@ -6,7 +6,7 @@
         $('#addEduBG').off('click').on('click', function (e) {
             e.preventDefault();
             var tbody = $('#CO_rows');
-            tbody.append('<tr><td><select class="form-control" name="EduBackGround.EducationLevel"><option>PhD</option><option>Master</option><option>Bachelor</option><option>Diploma</option></select></td ><td><input type="text" class="form-control" name="EduBackGround.Institution" /></td><td><input type="text" class="form-control" name="EduBackGround.Country" /></td><td><input type="text" class="form-control" name="EduBackGround.Major" /></td><td><input type="date" class="form-control" name="EduBackGround.GraduationDate" /></td></tr>');
+            tbody.append('<tr><td><select class="form-control" name="EducationBackground.Level"><option>PhD</option><option>Master</option><option>Bachelor</option><option>Diploma</option></select></td ><td><input type="text" class="form-control" name="EducationBackground.School" /></td><td><input type="text" class="form-control" name="EducationBackground.Country" /></td><td><input type="text" class="form-control" name="EduBackGround.Major" /></td><td><input type="date" class="form-control" name="EducationBackground.GraduatedDate" /></td></tr>');
         });
 
         $('#addLanguage').off('click').on('click', function (e) {
@@ -77,6 +77,12 @@
                 validated = false;
             }
 
+            if ($('#txtPOB').val() == "") {
+                $('#txtPOB').addClass("invalidate-input");
+                $('#warning-pob').text("Please enter place of birth.");
+                validated = false;
+            }
+
             if ($('#txtNationality').val() == "") {
                 $('#txtNationality').addClass("invalidate-input");
                 $('#warning-nationality').text("Please enter your nationality.");
@@ -97,12 +103,17 @@
             }   
 
             var phone = $('#txtPhone').val();
-            var phonefilter = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
-            if (!phonefilter.test(phone) || phone.length < 8) {
+            if (phone == "") {
                 $('#txtPhone').addClass("invalidate-input");
                 $('#warning-phone').text("Please enter a valid phone number.");
                 validated = false;
-            } 
+            }
+            //var phonefilter = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+            //if (!phonefilter.test(phone) || phone.length < 12) {
+            //    $('#txtPhone').addClass("invalidate-input");
+            //    $('#warning-phone').text("Please enter a valid phone number.");
+            //    validated = false;
+            //} 
 
             var email = $('#txtEmail').val();
             var emailfilter = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -123,6 +134,12 @@
             if ($('#txtIssuedOn').val() == "") {
                 $('#txtIssuedOn').addClass("invalidate-input");
                 $('#warning-issuedOn').text("Please enter a valid date.");
+                validated = false;
+            }
+
+            if ($('#txtIssuedPlace').val() == "") {
+                $('#txtIssuedPlace').addClass("invalidate-input");
+                $('#warning-issuedPlace').text("Please enter issued place.");
                 validated = false;
             }
 
@@ -147,8 +164,12 @@
                 validated = false;
             }
 
-            if (validated)
+            if (validated) {
                 $('#myForm').submit();
+            }
+            else {
+                $('#txtFullname').focus();
+            }
         });
     }
 

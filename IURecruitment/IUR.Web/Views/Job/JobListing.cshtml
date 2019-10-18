@@ -1,0 +1,115 @@
+﻿@model IUR.Web.Models.JobListingViewModel
+@{
+    ViewBag.Title = "Job Listing";
+    var managementAndStaffJobs = Model.ManagementAndStaffJobs;   
+    var fulltimeJobs = Model.FulltimeJobs;
+    var parttimeJobs = Model.ParttimeJobs;
+}
+
+<div class="content">
+    <main>
+        <h3 class="section-title-lg">Available positions</h3>
+        <p class="section-title-sm">Management and Staff positions</p>
+        <table class="table table-striped">
+            <thead>
+                <tr class="bg-primary">
+                    <th scope="col">Position</th>
+                    <th scope="col">Office/Department</th>
+                    <th scope="col">Posted date</th>
+                    <th scope="col">Deadline for application</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (managementAndStaffJobs.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="4">No records to display.</td>
+                    </tr>
+                }
+                else
+                {
+                    var i = 1;
+                    foreach (var job in managementAndStaffJobs)
+                    {
+                        <tr>
+                            <td><a href="view-job-details/@job.ID">@job.Name</a></td>
+                            <td>@job.Department</td>
+                            <td>@(job.CreatedDate.HasValue ? job.CreatedDate.Value.ToString("dd/MM/yyyy") : null)</td>
+                            <td>@job.Deadline.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+
+        <p class="section-title-sm">Full-time Faculty Positions</p>
+        <table class="table table-striped">
+            <thead>
+                <tr class="bg-primary">
+                    <th scope="col">Position</th>
+                    <th scope="col">Office/Department</th>
+                    <th scope="col">Posted date</th>
+                    <th scope="col">Deadline for application</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (fulltimeJobs.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="4">No records to display.</td>
+                    </tr>
+                }
+                else
+                {
+                    var i = 1;
+                    foreach (var job in fulltimeJobs)
+                    {
+                        <tr>
+                            <td><a href="#">@job.Name</a></td>
+                            <td>@job.Department</td>
+                            <td>@(job.CreatedDate.HasValue ? job.CreatedDate.Value.ToString("dd/MM/yyyy") : null)</td>
+                            <td>@job.Deadline.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+
+        <p class="section-title-sm">Part-time Positions</p>
+        <table class="table table-striped">
+            <thead>
+                <tr class="bg-primary">
+                    <th scope="col">Position</th>
+                    <th scope="col">Office/Department</th>
+                    <th scope="col">Posted date</th>
+                    <th scope="col">Deadline for application</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (parttimeJobs.Count() == 0)
+                {
+                    <tr>
+                        <td>No records to display.</td>
+                    </tr>
+                }
+                else
+                {
+                    var i = 1;
+                    foreach (var job in parttimeJobs)
+                    {
+                        <tr>
+                            <td><a href="#">@job.Name</a></td>
+                            <td>@job.Department</td>
+                            <td>@(job.CreatedDate.HasValue ? job.CreatedDate.Value.ToString("dd/MM/yyyy") : null)</td>
+                            <td>@job.Deadline.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </main>
+</div>
+
