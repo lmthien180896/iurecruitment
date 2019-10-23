@@ -62,13 +62,21 @@
     <Compile Include="Infrastructure\RepositoryBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="IURDbContext.cs" />
-    <Compile Include="Migrations\201910150720270_initializeDb.cs" />
-    <Compile Include="Migrations\201910150720270_initializeDb.Designer.cs">
-      <DependentUpon>201910150720270_initializeDb.cs</DependentUpon>
+    <Compile Include="Migrations\201910220412174_initializeDb.cs" />
+    <Compile Include="Migrations\201910220412174_initializeDb.Designer.cs">
+      <DependentUpon>201910220412174_initializeDb.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910180655504_editMaxLengthJobComponents.cs" />
-    <Compile Include="Migrations\201910180655504_editMaxLengthJobComponents.Designer.cs">
-      <DependentUpon>201910180655504_editMaxLengthJobComponents.cs</DependentUpon>
+    <Compile Include="Migrations\201910220543343_removeApplicationUser.cs" />
+    <Compile Include="Migrations\201910220543343_removeApplicationUser.Designer.cs">
+      <DependentUpon>201910220543343_removeApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910220548576_addUser.cs" />
+    <Compile Include="Migrations\201910220548576_addUser.Designer.cs">
+      <DependentUpon>201910220548576_addUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910230301293_updateUseraddPhone.cs" />
+    <Compile Include="Migrations\201910230301293_updateUseraddPhone.Designer.cs">
+      <DependentUpon>201910230301293_updateUseraddPhone.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,10 +95,12 @@
     <Compile Include="Repositories\OtherQuestionRepository.cs" />
     <Compile Include="Repositories\OtherSkillRepository.cs" />
     <Compile Include="Repositories\PageRepository.cs" />
+    <Compile Include="Repositories\RankRepository.cs" />
     <Compile Include="Repositories\ResumeRepository.cs" />
     <Compile Include="Repositories\SupportOnlineRepository.cs" />
     <Compile Include="Repositories\SystemConfigRepository.cs" />
-    <Compile Include="Repositories\VisitorStatistic.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\VisitorStatisticRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IUR.Common\IUR.Common.csproj">
@@ -107,11 +117,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910150720270_initializeDb.resx">
-      <DependentUpon>201910150720270_initializeDb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910220412174_initializeDb.resx">
+      <DependentUpon>201910220412174_initializeDb.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910180655504_editMaxLengthJobComponents.resx">
-      <DependentUpon>201910180655504_editMaxLengthJobComponents.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910220543343_removeApplicationUser.resx">
+      <DependentUpon>201910220543343_removeApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910220548576_addUser.resx">
+      <DependentUpon>201910220548576_addUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910230301293_updateUseraddPhone.resx">
+      <DependentUpon>201910230301293_updateUseraddPhone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

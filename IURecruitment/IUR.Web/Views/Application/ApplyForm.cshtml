@@ -7,7 +7,7 @@
     <script src="~/Assets/client/js/applyPage.js"></script>
     <script>
         var editor = CKEDITOR.replace('txtCareerObjectives', {
-            customConfig: '~/Assets/admin/js/plugins/ckeditor/config.js',
+            customConfig: '/Assets/admin/js/plugins/ckeditor/config.js',
         });
     </script>
 }
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                //PERSONAL INFORMATION
+                //APPLICANT DETAIL
                 <div id="PersonalInformation">
                     <hr class="hr-black" />
                     <p class="section-title-md">1. PERSONAL INFORMATION</p>
@@ -113,7 +113,7 @@
                     <div class="form-row">
                         <label class="col-sm-2 col-form-label form-label">Issued On:</label>
                         <div class="col-sm-3">
-                            <input type="date" class="form-control" name="IssuedOn" id="txtIssuedOn" />
+                            <input type="date" class="form-control" name="IssuedDate" id="txtIssuedOn" />
                             <span id="warning-issuedOn" class="warning-invalidate"></span>
                         </div>
                         <label class="col-sm-2 col-form-label form-label">Issued Place:</label>
@@ -125,8 +125,8 @@
                     <div class="form-row">
                         <label class="col-sm-2 col-form-label form-label">Photo:</label>
                         <div class="col-sm-10">
-                            <input type="file" class="form-control-file txtimageFile" id="files" name="files">
-                            Browse (jpg; jpeg; png; gif), max size 1 MB.
+                            <input type="file" class="form-control-file" id="filePhoto" name="files" readonly>                    
+                             (jpg; jpeg; png; gif), max size 1 MB.
                         </div>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                     <hr class="hr-black" />
                     <p class="section-title-md">2. CAREER OBJECTIVES</p>
                     <span id="warning-co" class="warning-invalidate"></span>
-                    <textarea id="txtCareerObjectives" name="CareerObjective" required></textarea>
+                    <textarea id="txtCareerObjectives" name="CareerObjective.Objective" required></textarea>
                 </div>
 
                 //EDUCATION BACKGROUND
@@ -159,17 +159,17 @@
                             <tbody id="CO_rows">
                                 <tr>
                                     <td>
-                                        <select class="form-control" name="EducationBackground.Level">
+                                        <select class="form-control" name="EducationBackgroundVm.Level">
                                             <option>PhD</option>
                                             <option>Master</option>
                                             <option>Bachelor</option>
                                             <option>Diploma</option>
                                         </select>
                                     </td>
-                                    <td><input type="text" class="form-control" name="EducationBackground.School" /></td>
-                                    <td><input type="text" class="form-control" name="EducationBackground.Country" /></td>
-                                    <td><input type="text" class="form-control" name="EducationBackground.Major" /></td>
-                                    <td><input type="date" class="form-control" name="EducationBackground.GraduatedDate" /></td>
+                                    <td><input type="text" class="form-control" name="EducationBackgroundVm.School" /></td>
+                                    <td><input type="text" class="form-control" name="EducationBackgroundVm.Country" /></td>
+                                    <td><input type="text" class="form-control" name="EducationBackgroundVm.Major" /></td>
+                                    <td><input type="date" class="form-control" name="EducationBackgroundVm.GraduatedDate" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -177,17 +177,18 @@
                     </div>
                     <br />
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Rank.Rank" id="rank-radioBtn1" value="Assoc. Prof">
+                        <input class="form-check-input" type="radio" name="Rank.Name" id="radioRank" value="Assoc. Prof">
                         <label class="form-check-label" for="inlineRadio1">Assoc. Prof</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Rank.Rank" id="rank-radioBtn2" value="Prof">
+                        <input class="form-check-input" type="radio" name="Rank.Name" id="radioRank" value="Prof">
                         <label class="form-check-label" for="inlineRadio2">Prof</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="Rank.Rank" id="rank-radioBtn3" value="None">
+                        <input class="form-check-input" type="radio" name="Rank.Name" id="radioRank" value="None" checked>
                         <label class="form-check-label" for="inlineRadio3">None</label>
                     </div>
+                    <span id="warning-rank" class="warning-invalidate"></span>
                 </div>
 
                 <br />
@@ -210,7 +211,7 @@
                                         <input type="text" name="Language.Certificate" class="form-control" placeholder="IETLS, TOELF, ..." />
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" name="Language.Grade" />
+                                        <input type="text" class="form-control" name="Language.Level" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -296,15 +297,15 @@
                             <tbody id="emhis_rows">
                                 <tr>
                                     <td>
-                                        <input type="date" class="form-control" name="Experience.FromDate" />
+                                        <input type="date" class="form-control" name="EmploymentHistory.FromDate" />
                                     </td>
                                     <td>
-                                        <input type="date" class="form-control" name="Experience.ToDate" />
+                                        <input type="date" class="form-control" name="EmploymentHistory.ToDate" />
                                     </td>
-                                    <td><input type="text" class="form-control" name="Experience.Company" /></td>
-                                    <td><input type="text" class="form-control" name="Experience.Position" /></td>
-                                    <td><textarea class="form-control" name="Experience.Description"></textarea></td>
-                                    <td><textarea class="form-control" name="Experience.Reason"></textarea></td>
+                                    <td><input type="text" class="form-control" name="EmploymentHistory.Company" /></td>
+                                    <td><input type="text" class="form-control" name="EmploymentHistory.Position" /></td>
+                                    <td><textarea class="form-control" name="EmploymentHistory.Description"></textarea></td>
+                                    <td><textarea class="form-control" name="EmploymentHistory.LeavingReason"></textarea></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -318,34 +319,34 @@
                         <div class="form-row">
                             <label class="col-sm-6 col-form-label form-label">When will you be available to work:</label>
                             <div class="col-sm-4">
-                                <select class="form-control" name="OtherQuestions.Available" id="sltAvailable">
-                                    <option>Please Select</option>
-                                    <option>Immediately</option>
-                                    <option>One week later</option>
-                                    <option>One month later</option>
-                                    <option>More than one month</option>
+                                <select class="form-control" name="OtherQuestion.Available" id="sltAvailable">
+                                    <option value="">Please Select</option>
+                                    <option value="Immediately">Immediately</option>
+                                    <option value="One week later">One week later</option>
+                                    <option value="One month later">One month later</option>
+                                    <option value="More than one month</">More than one month</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="col-sm-6 col-form-label form-label">Have you ever applied to International University:</label>
                             <div class="col-sm-4">
-                                <select class="form-control" name="OtherQuestions.AppliedIU" id="sltAppliedIU">
-                                    <option>Please Select</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                <select class="form-control" name="OtherQuestion.IsApplied" id="sltAppliedIU">
+                                    <option value="">Please Select</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="col-sm-6 col-form-label form-label">How do you get informed of the recruitment:</label>
                             <div class="col-sm-4">
-                                <select class="form-control" name="OtherQuestions.Informed" id="sltInformed">
-                                    <option>Please Select</option>
-                                    <option>Internet</option>
-                                    <option>Friend/Relatives</option>
-                                    <option>Newspaper</option>
-                                    <option>Others</option>
+                                <select class="form-control" name="OtherQuestion.IsInformed" id="sltInformed">
+                                    <option value="">Please Select</option>
+                                    <option value="Internet">Internet</option>
+                                    <option value="Friend/Relatives">Friend/Relatives</option>
+                                    <option value="Newspaper">Newspaper</option>
+                                    <option value="Others">Others</option>
                                 </select>
                             </div>
                         </div>
@@ -360,7 +361,7 @@
                     <div class="form-row">
                         <label class="col-sm-8 col-form-label">Please attach your own résumé here for further information and references (PDF only)</label>
                         <div class="col-sm-4">
-                            <input type="file" class="form-control-file txtresumeFile" id="file" name="files">
+                            <input type="file" class="form-control-file" id="fileResume" name="files">
                             <span id="warning-resume" class="warning-invalidate"></span>
                         </div>
                     </div>

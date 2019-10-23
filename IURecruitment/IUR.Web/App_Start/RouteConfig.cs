@@ -21,6 +21,13 @@ namespace IUR.Web
             );
 
             routes.MapRoute(
+                name: "View Job Detail",
+                url: "view-job-details/j-{id}",
+                defaults: new { controller = "Job", action = "ViewJobDetail", id = UrlParameter.Optional },
+                namespaces: new string[] { "IUR.Web.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "How To Apply",
                 url: "how-to-apply",
                 defaults: new { controller = "Home", action = "HowToApply", id = UrlParameter.Optional },

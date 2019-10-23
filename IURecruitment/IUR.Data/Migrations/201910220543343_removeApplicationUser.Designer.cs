@@ -7,13 +7,13 @@ namespace IUR.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class initializeDb : IMigrationMetadata
+    public sealed partial class removeApplicationUser : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initializeDb));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(removeApplicationUser));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910150720270_initializeDb"; }
+            get { return "201910220543343_removeApplicationUser"; }
         }
         
         string IMigrationMetadata.Source

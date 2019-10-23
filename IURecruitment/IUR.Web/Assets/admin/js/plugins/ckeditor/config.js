@@ -12,12 +12,12 @@ CKEDITOR.editorConfig = function( config ) {
     config.syntaxhighlight_lang = 'csharp';
     config.syntaxhighlight_hideControls = true;
     config.languages = 'vi';
-    config.filebrowserBrowseUrl = '/assets/admin/js/plugins/ckfinder/ckfinder.html';
-    config.filebrowserImageBrowseUrl = '/assets/admin/js/plugins/ckfinder/ckfinder.html?Types=Images';
-    config.filebrowserFlashBrowseUrl = '/assets/admin/js/plugins/ckfinder/ckfinder.html?Types=Flash';
-    config.filebrowserUploadUrl = '/assets/admin/js/plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=File';
-    config.filebrowserImageUploadUrl = '/Data';
-    config.filebrowserFlashUploadUrl = '/assets/admin/js/plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash'; 
+    config.filebrowserBrowseUrl = '~/Assets/admin/js/plugins/ckfinder/ckfinder.html';
+    config.filebrowserImageBrowseUrl = '~/Assets/admin/js/plugins/ckfinder/ckfinder.html?Types=Images';
+    config.filebrowserFlashBrowseUrl = '~/Assets/admin/js/plugins/ckfinder/ckfinder.html?Types=Flash';
+    config.filebrowserUploadUrl = '~/Assets/admin/js/plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=File';
+    config.filebrowserImageUploadUrl = '/UploadedFiles';
+    config.filebrowserFlashUploadUrl = '~/Assets/admin/js/plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash'; 
 
 
 };

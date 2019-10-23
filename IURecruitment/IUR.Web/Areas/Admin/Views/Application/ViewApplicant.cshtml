@@ -1,0 +1,294 @@
+﻿@model IUR.Web.Models.ApplicantDetailViewModel
+@{
+    ViewBag.Title = "Applicant Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content">
+    <main>
+        <h3 class="section-title-lg">Applicant Details</h3>
+        <br />
+        <img src="@Model.Photo" alt="ApplicantPhoto" class="img-thumbnail img-fluid applicant-photo" />
+        <div id="PersonalInformation">
+            <hr class="hr-black" />
+            <p class="section-title-md">1. PERSONAL INFORMATION</p>
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">Fullname:</label>
+                <div class="col-sm-2">
+                    @Model.Title
+                </div>
+                <div class="col-sm-8">
+                    @Model.Fullname
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">Date of Birth:</label>
+                <div class="col-sm-3">
+                    @Model.DOB
+                </div>
+                <label class="col-sm-2 col-form-label form-label">Place of Birth:</label>
+                <div class="col-sm-5">
+                    @Model.PlaceOfBirth
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">Nationality:</label>
+                <div class="col-sm-10">
+                    @Model.Nationality
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">Contact Address:</label>
+                <div class="col-sm-10">
+                    @Model.ContactAddress
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">Permanent Address:</label>
+                <div class="col-sm-10">
+                    @Model.PermanentAddress
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">Phone:</label>
+                <div class="col-sm-3">
+                    @Model.Phone
+                </div>
+                <label class="col-sm-2 col-form-label form-label">Email:</label>
+                <div class="col-sm-5">
+                    @Model.Email
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">Identity Card Number/Passport:</label>
+                <div class="col-sm-10">
+                    @Model.IDCard
+                </div>
+            </div>
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">Issued On:</label>
+                <div class="col-sm-3">
+                    @Model.IssuedDate
+                </div>
+                <label class="col-sm-2 col-form-label form-label">Issue Place:</label>
+                <div class="col-sm-5">
+                    @Model.IssuedPlace
+                </div>
+            </div>
+        </div>
+
+        <div id="CareerObjectives">
+            <hr class="hr-black" />
+            <p class="section-title-md">2. CAREER OBJECTIVES</p>
+            @Html.Raw(Model.CareerObjective.Objective)
+        </div>
+
+
+        <div id="Background">
+            <hr class="hr-black" />
+            <p class="section-title-md">3. EDUCATION BACKGROUND</p>
+            <p class="section-title-SM">3.1 BACKGROUND</p>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="bg-dark">
+                            <th scope="col">Education level</th>
+                            <th scope="col">School/University</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Major</th>
+                            <th scope="col">Date of graduation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="CO_rows">
+                        @foreach (var edu in Model.EducationBackgrounds)
+                        {
+                            <tr>
+                                <td>
+                                    @edu.Level
+                                </td>
+                                <td>
+                                    @edu.School
+                                </td>
+                                <td>
+                                    @edu.Country
+                                </td>
+                                <td>
+                                    @edu.Major
+                                </td>
+                                <td>
+                                    @edu.GraduatedDate.ToString("dd/mm/yyyy")
+                                </td>
+                            </tr>
+                        }
+                </table>
+            </div>
+            <br />
+            <div class="form-row">
+                <label class="col-sm-2 col-form-label form-label">@Model.Rank.Name</label>
+            </div>
+        </div>
+
+        <br />
+        <p class="section-title-SM">3.2 SKILLS</p>
+
+
+        <div id="Language">
+            <p class="section-title-SM">3.2.1 LANGUAGE</p>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="bg-dark">
+                            <th scope="col">Certificate</th>
+                            <th scope="col">Level/Score/Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="language_rows">
+                        @foreach (var lang in Model.Languages)
+                        {
+                            <tr>
+                                <td>@lang.Certificate</td>
+                                <td>
+                                    @lang.Level
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <br />
+
+        <div id="computer-skills">
+            <p class="section-title-SM">3.2.2 COMPUTER SKILLS</p>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="bg-dark">
+                            <th scope="col">Software</th>
+                            <th scope="col">Level</th>
+                        </tr>
+                    </thead>
+                    <tbody id="compskill_rows">
+                        @foreach (var compskill in Model.ComputerSkills)
+                        {
+                            <tr>
+                                <td>@compskill.Software</td>
+                                <td>
+                                    @compskill.Level
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+
+        <div id="other-skills">
+            <p class="section-title-SM">3.2.3 OTHER SKILLS</p>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="bg-dark">
+                            <th scope="col">Skill</th>
+                            <th scope="col">Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody id="otherskill_rows">
+                        @foreach (var otherskill in Model.OtherSkills)
+                        {
+                            <tr>
+                                <td>@otherskill.Skill</td>
+                                <td>
+                                    @otherskill.Reference
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <br />
+
+        <div id="EmploymentHistoryAndWorkingExperience">
+            <hr class="hr-black" />
+            <p class="section-title-md">4. EMPLOYMENT HISTORY AND WORKING EXPERIENCE</p>
+            <p class="section-title-SM">4.1 EMPLOYMENT HISTORY</p>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="bg-dark">
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Organization/Company</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Reason for leaving</th>
+                        </tr>
+                    </thead>
+                    <tbody id="emhis_rows">
+                        @foreach (var experience in Model.EmploymentHistories)
+                        {
+                            <tr>
+                                <td>@experience.FromDate</td>
+                                <td>
+                                    @experience.ToDate
+                                </td>
+                                <td>
+                                    @experience.Company
+                                </td>
+                                <td>
+                                    @experience.Position
+                                </td>
+                                <td>
+                                    @experience.Description
+                                </td>
+                                <td>
+                                    @experience.LeavingReason
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            <br />
+
+            @*EMPLOYMENT HISTORY AND WORKING EXPERIENCE*@
+            <div id="otherquestion">
+                <p class="section-title-SM">4.2 OTHER QUESTIONS</p>
+                <div class="form-row">
+                    <label class="col-sm-6 col-form-label form-label">When will you be available to work:</label>
+                    <div class="col-sm-4">
+                        @Model.OtherQuestion.Available
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label class="col-sm-6 col-form-label form-label">Have you ever applied to International University:</label>
+                    <div class="col-sm-4">
+                        @Model.OtherQuestion.IsApplied
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label class="col-sm-6 col-form-label form-label">How do you get informed of the recruitment:</label>
+                    <div class="col-sm-4">
+                        @Model.OtherQuestion.IsInformed
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+
+        <div id="Resume">
+            <hr class="hr-black" />
+            <p class="section-title-md">5. PERSONAL RESUME</p>
+            <a href="@Model.Resume.ResumeUrl" target="_blank">View Resume</a>
+        </div>
+        <br />
+        <a href="/Admin/Application/Index" class="btn btn-dark" style="color: white;">Back</a>
+    </main>
+</div>

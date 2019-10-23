@@ -15,13 +15,20 @@ namespace IUR.Model.Models
         public int ApplicantID { set; get; }
 
         [MaxLength(256)]
+        [Required]
         public string Level { set; get; }
 
         [MaxLength(256)]
+        [Required]
         public string School { set; get; }
 
+        [Required]
         [MaxLength(256)]
         public string Country { set; get; }
+
+        [Required]
+        [MaxLength(256)]
+        public string Major { get; set; }
 
         public DateTime GraduatedDate { set; get; }
 

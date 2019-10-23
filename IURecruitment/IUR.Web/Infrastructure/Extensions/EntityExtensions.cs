@@ -38,5 +38,42 @@ namespace IUR.Web.Infrastructure.Extensions
             job.MetaDescription = jobVm.MetaDescription;
             job.Status = jobVm.Status;
         }
+
+        public static void UpdateApplicantJob(this ApplicantJob applicantJob, ApplicantJobViewModel applicantJobVm)
+        {
+            applicantJob.JobID = applicantJobVm.JobID;
+            applicantJob.ApplicantID = applicantJobVm.ApplicantID;
+        }
+
+        public static void UpdateUser(this User user, UserViewModel userVm)
+        {
+            user.ID = userVm.ID;
+            user.Username = userVm.Username;
+            user.HashedPassword = userVm.HashedPassword;
+            user.Fullname = userVm.Fullname;
+            user.Phone = userVm.Phone;
+            user.Status = userVm.Status;
+            user.CreatedDate = userVm.CreatedDate;
+            user.CreatedBy = userVm.CreatedBy;
+            user.UpdatedDate = userVm.UpdatedDate;
+        }
+
+        public static void UpdateApplicantDetail(this ApplicantDetail applicantDetailVm, ApplicationViewModel applicationVm)
+        {
+            applicantDetailVm.ID = applicationVm.ApplicantID;
+            applicantDetailVm.Title = applicationVm.Title;
+            applicantDetailVm.Fullname = applicationVm.Fullname;
+            applicantDetailVm.DOB = applicationVm.DOB;
+            applicantDetailVm.PlaceOfBirth = applicationVm.PlaceOfBirth;            
+            applicantDetailVm.Nationality = applicationVm.Nationality;            
+            applicantDetailVm.ContactAddress = applicationVm.ContactAddress;            
+            applicantDetailVm.PermanentAddress = applicationVm.PermanentAddress;            
+            applicantDetailVm.Phone = applicationVm.Phone;            
+            applicantDetailVm.Email = applicationVm.Email;            
+            applicantDetailVm.IDCard = applicationVm.IDCard;            
+            applicantDetailVm.IssuedDate = applicationVm.IssuedDate;            
+            applicantDetailVm.IssuedPlace = applicationVm.IssuedPlace;                                    
+            applicantDetailVm.Photo = applicationVm.Photo;                                    
+        }
     }
 }

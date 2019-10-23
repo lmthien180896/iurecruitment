@@ -7,13 +7,13 @@ namespace IUR.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class editMaxLengthJobComponents : IMigrationMetadata
+    public sealed partial class initializeDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(editMaxLengthJobComponents));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initializeDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910180655504_editMaxLengthJobComponents"; }
+            get { return "201910220412174_initializeDb"; }
         }
         
         string IMigrationMetadata.Source

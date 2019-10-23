@@ -26,7 +26,7 @@ namespace IUR.Model.Models
         [ForeignKey("ApplicantID")]
         public virtual ApplicantDetail ApplicantDetail { get; set; }
 
-        [ForeignKey("ApplicantID")]
+        [ForeignKey("JobID")]
         public virtual Job Job { get; set; }
     }
 }

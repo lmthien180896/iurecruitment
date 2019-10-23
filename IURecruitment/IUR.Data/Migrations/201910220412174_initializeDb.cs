@@ -13,7 +13,7 @@ namespace IUR.Data.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Fullname = c.String(nullable: false, maxLength: 256),
-                        Title = c.String(nullable: false, maxLength: 5),
+                        Title = c.String(nullable: false, maxLength: 256),
                         DOB = c.DateTime(nullable: false),
                         PlaceOfBirth = c.String(nullable: false, maxLength: 256),
                         Nationality = c.String(nullable: false, maxLength: 256),
@@ -25,7 +25,6 @@ namespace IUR.Data.Migrations
                         IssuedDate = c.DateTime(nullable: false),
                         IssuedPlace = c.String(nullable: false, maxLength: 256),
                         Photo = c.String(nullable: false, maxLength: 256),
-                        OtherQuestionId = c.Int(nullable: false),
                         CreatedDate = c.DateTime(),
                         CreatedBy = c.String(maxLength: 256),
                         UpdatedDate = c.DateTime(),
@@ -52,9 +51,20 @@ namespace IUR.Data.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false),
-                        Available = c.String(maxLength: 256),
-                        IsApplied = c.Boolean(nullable: false),
-                        IsInformed = c.Boolean(nullable: false),
+                        Available = c.String(nullable: false, maxLength: 256),
+                        IsApplied = c.String(nullable: false, maxLength: 256),
+                        IsInformed = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.ApplicantDetails", t => t.ID)
+                .Index(t => t.ID);
+            
+            CreateTable(
+                "dbo.Ranks",
+                c => new
+                    {
+                        ID = c.Int(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.ApplicantDetails", t => t.ID)
@@ -81,8 +91,9 @@ namespace IUR.Data.Migrations
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.ApplicantDetails", t => t.ApplicantID, cascadeDelete: true)
-                .ForeignKey("dbo.Jobs", t => t.ApplicantID, cascadeDelete: true)
-                .Index(t => t.ApplicantID);
+                .ForeignKey("dbo.Jobs", t => t.JobID, cascadeDelete: true)
+                .Index(t => t.ApplicantID)
+                .Index(t => t.JobID);
             
             CreateTable(
                 "dbo.Jobs",
@@ -93,8 +104,8 @@ namespace IUR.Data.Migrations
                         TimeType = c.String(nullable: false, maxLength: 50),
                         EmployeeType = c.String(nullable: false, maxLength: 50),
                         DepartmentID = c.Int(nullable: false),
-                        Description = c.String(nullable: false, maxLength: 256),
-                        Requirement = c.String(nullable: false, maxLength: 256),
+                        Description = c.String(nullable: false),
+                        Requirement = c.String(nullable: false),
                         Deadline = c.DateTime(nullable: false),
                         CreatedDate = c.DateTime(),
                         CreatedBy = c.String(maxLength: 256),
@@ -143,9 +154,10 @@ namespace IUR.Data.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         ApplicantID = c.Int(nullable: false),
-                        Level = c.String(maxLength: 256),
-                        School = c.String(maxLength: 256),
-                        Country = c.String(maxLength: 256),
+                        Level = c.String(nullable: false, maxLength: 256),
+                        School = c.String(nullable: false, maxLength: 256),
+                        Country = c.String(nullable: false, maxLength: 256),
+                        Major = c.String(nullable: false, maxLength: 256),
                         GraduatedDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
@@ -165,7 +177,9 @@ namespace IUR.Data.Migrations
                         Description = c.String(maxLength: 256),
                         LeavingReason = c.String(maxLength: 256),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.ApplicantDetails", t => t.ApplicantID, cascadeDelete: true)
+                .Index(t => t.ApplicantID);
             
             CreateTable(
                 "dbo.Errors",
@@ -394,12 +408,14 @@ namespace IUR.Data.Migrations
             DropForeignKey("dbo.OtherSkills", "ApplicantID", "dbo.ApplicantDetails");
             DropForeignKey("dbo.Menus", "GroupID", "dbo.MenuGroups");
             DropForeignKey("dbo.Languages", "ApplicantID", "dbo.ApplicantDetails");
+            DropForeignKey("dbo.EmploymentHistories", "ApplicantID", "dbo.ApplicantDetails");
             DropForeignKey("dbo.EducationBackground", "ApplicantID", "dbo.ApplicantDetails");
             DropForeignKey("dbo.ComputerSkills", "ApplicantID", "dbo.ApplicantDetails");
-            DropForeignKey("dbo.ApplicantJobs", "ApplicantID", "dbo.Jobs");
+            DropForeignKey("dbo.ApplicantJobs", "JobID", "dbo.Jobs");
             DropForeignKey("dbo.Jobs", "DepartmentID", "dbo.Departments");
             DropForeignKey("dbo.ApplicantJobs", "ApplicantID", "dbo.ApplicantDetails");
             DropForeignKey("dbo.Resumes", "ID", "dbo.ApplicantDetails");
+            DropForeignKey("dbo.Ranks", "ID", "dbo.ApplicantDetails");
             DropForeignKey("dbo.OtherQuestions", "ID", "dbo.ApplicantDetails");
             DropForeignKey("dbo.CareerObjectives", "ID", "dbo.ApplicantDetails");
             DropIndex("dbo.IdentityUserLogins", new[] { "ApplicationUser_Id" });
@@ -409,11 +425,14 @@ namespace IUR.Data.Migrations
             DropIndex("dbo.OtherSkills", new[] { "ApplicantID" });
             DropIndex("dbo.Menus", new[] { "GroupID" });
             DropIndex("dbo.Languages", new[] { "ApplicantID" });
+            DropIndex("dbo.EmploymentHistories", new[] { "ApplicantID" });
             DropIndex("dbo.EducationBackground", new[] { "ApplicantID" });
             DropIndex("dbo.ComputerSkills", new[] { "ApplicantID" });
             DropIndex("dbo.Jobs", new[] { "DepartmentID" });
+            DropIndex("dbo.ApplicantJobs", new[] { "JobID" });
             DropIndex("dbo.ApplicantJobs", new[] { "ApplicantID" });
             DropIndex("dbo.Resumes", new[] { "ID" });
+            DropIndex("dbo.Ranks", new[] { "ID" });
             DropIndex("dbo.OtherQuestions", new[] { "ID" });
             DropIndex("dbo.CareerObjectives", new[] { "ID" });
             DropTable("dbo.VisitorStatistics");
@@ -438,6 +457,7 @@ namespace IUR.Data.Migrations
             DropTable("dbo.Jobs");
             DropTable("dbo.ApplicantJobs");
             DropTable("dbo.Resumes");
+            DropTable("dbo.Ranks");
             DropTable("dbo.OtherQuestions");
             DropTable("dbo.CareerObjectives");
             DropTable("dbo.ApplicantDetails");

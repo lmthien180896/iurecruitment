@@ -14,14 +14,13 @@ namespace IUR.Controllers
         {
             var session = (UserLogin)Session[CommonConstants.USER_SESSION]; // Lấy user session và ép kiểu UserLogin
             if (session == null)
-            {
-                // Nếu session null thì trả về trang Admin/Login/Index
+            {            
                 TempData["isLogin"] = "";
             }
             else
             {
                 TempData["isLogin"] = "admin";
-                TempData["DisplayName"] = session.UserName;
+                TempData["Username"] = session.UserName;
             }
             base.OnActionExecuted(filterContext);
         }
@@ -29,18 +28,7 @@ namespace IUR.Controllers
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-            else if (type == "warning")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
+            TempData["AlertType"] = type;          
         }
     }
 }

@@ -12,7 +12,7 @@ namespace IUR.Web.Areas.Admin.Models
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Mời nhập password")]
-        public string Password { get; set; }
+        public string HashedPassword { get; set; }
 
     }
 }

@@ -40,7 +40,7 @@ var departmentController = {
                         type: "POST",
                         success: function (response) {
                             if (response.status === true) {
-                                toastr.success('Delete departments successfully');                                                                
+                                toastr.success(response.message);                                                                
                                 departmentController.loadDepartments();
                                 departmentController.registerEvent();
                             }

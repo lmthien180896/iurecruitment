@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    var username = TempData["Username"];
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,28 +31,30 @@
             <li><a href="https://hcmiu.edu.vn/">About us</a></li>
             <li><a href="/job-listing">Job listing</a></li>
             <li><a href="/how-to-apply">How to apply</a></li>
-            @*@if (TempData["isLogin"].ToString() == "admin")
+            @if (TempData["isLogin"].ToString() == "admin")
                 {
                     <div class="dropdown">
                         <li class="dropdown-toggle" data-toggle="dropdown"><a href="#">Admin Functions</a></li>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/Admin/ManageJobs/Index">Manage Jobs</a>
-                            <a class="dropdown-item" href="/Admin/ManageApplications/Index">Manage Applications</a>
-                            <a class="dropdown-item" href="/Admin/ManageDepartments/Index">Manage Departments</a>
-                            <a class="dropdown-item" href="/Admin/ManageUsers/Index">Manage Users</a>
+                            <a class="dropdown-item" href="/Admin/Job/Index">Manage Jobs</a>
+                            <a class="dropdown-item" href="/Admin/Application/Index">Manage Applications</a>
+                            <a class="dropdown-item" href="/Admin/Department/Index">Manage Departments</a>
+                            <a class="dropdown-item" href="/Admin/User/Index">Manage Users</a>
+                            <a class="dropdown-item" href="/Admin/Common/Footer">Edit Footer</a>
                         </div>
                     </div>
                     <div class="dropdown">
-                        <li class="dropdown-toggle" data-toggle="dropdown"><a href="#">@TempData["DisplayName"]</a></li>
-                        <div class="dropdown-menu">
-                            <a href="/Admin/Login/Logout">Log out</a>
+                        <li class="dropdown-toggle" data-toggle="dropdown"><a href="#">@username</a></li>
+                        <div class="dropdown-menu">                            
+                            <a class="dropdown-item" href="@Url.Action("ChangePasswordView", "User", new { Area = "Admin", username=username })">Change Password</a>
+                            <a class="dropdown-item" href="/Admin/Login/Logout">Log out</a>
                         </div>
                     </div>
                 }
                 else
                 {
                     <li><a href="/Admin/Login">Log in</a></li>
-                }*@
+                }
         </ul>
         <div class="burger">
             <div class="line1"></div>
@@ -62,7 +68,7 @@
         @if (TempData["AlertMessage"] != null)
         {
             <div id="toast-container" class="toast-top-right hide">
-                <div class="toast @TempData["AlertType"]" aria-live="polite" style="display: block;">
+                <div class="toast-@TempData["AlertType"]" aria-live="polite" style="display: block;">
                     <div class="toast-message">@TempData["AlertMessage"]</div>
                 </div>
             </div>
@@ -87,10 +93,11 @@
     <script src="~/Assets/admin/js/plugins/mustache.min.js"></script>
     <script src="~/Assets/admin/js/plugins/jquery.twbsPagination.min.js"></script>
     <script src="~/Assets/admin/js/plugins/toastr/toastr.js"></script>
-    <script src="~/Assets/admin/js/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/Assets/admin/js/plugins/ckeditor/ckeditor.js"></script>    
     <script src="~/Assets/client/js/applyPage.js"></script>
     <script src="~/Assets/client/js/navbar.js"></script>
     <script src="~/Assets/admin/js/common.js"></script>
+    <script src="~/Assets/client/js/common.js"></script>
     @RenderSection("script", required: false)  
 
 

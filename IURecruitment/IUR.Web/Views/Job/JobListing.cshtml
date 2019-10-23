@@ -32,8 +32,8 @@
                     foreach (var job in managementAndStaffJobs)
                     {
                         <tr>
-                            <td><a href="view-job-details/@job.ID">@job.Name</a></td>
-                            <td>@job.Department</td>
+                            <td><a href="view-job-details/j-@(job.ID)">@job.Name</a></td>
+                            <td>@job.Department.Name</td>
                             <td>@(job.CreatedDate.HasValue ? job.CreatedDate.Value.ToString("dd/MM/yyyy") : null)</td>
                             <td>@job.Deadline.ToString("dd/MM/yyyy")</td>
                         </tr>
@@ -66,7 +66,7 @@
                     foreach (var job in fulltimeJobs)
                     {
                         <tr>
-                            <td><a href="#">@job.Name</a></td>
+                            <td><a href="view-job-details/j-@(job.ID)">@job.Name</a></td>
                             <td>@job.Department</td>
                             <td>@(job.CreatedDate.HasValue ? job.CreatedDate.Value.ToString("dd/MM/yyyy") : null)</td>
                             <td>@job.Deadline.ToString("dd/MM/yyyy")</td>
@@ -100,7 +100,7 @@
                     foreach (var job in parttimeJobs)
                     {
                         <tr>
-                            <td><a href="#">@job.Name</a></td>
+                            <td><a href="view-job-details/j-@(job.ID)">@job.Name</a></td>
                             <td>@job.Department</td>
                             <td>@(job.CreatedDate.HasValue ? job.CreatedDate.Value.ToString("dd/MM/yyyy") : null)</td>
                             <td>@job.Deadline.ToString("dd/MM/yyyy")</td>

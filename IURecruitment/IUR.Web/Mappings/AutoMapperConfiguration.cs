@@ -10,6 +10,10 @@ namespace IUR.Web.Mappings
         {
             Mapper.CreateMap<Department, DepartmentViewModel>();                          
             Mapper.CreateMap<Job, JobViewModel>();                          
+            Mapper.CreateMap<ApplicantDetail, ApplicantDetailViewModel>();                          
+            Mapper.CreateMap<ApplicantDetail, ApplicationViewModel>();                          
+            Mapper.CreateMap<User, UserViewModel>();                          
+            Mapper.CreateMap<Footer, FooterViewModel>();                          
         }
     }
 }

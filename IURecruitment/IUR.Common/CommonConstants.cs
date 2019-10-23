@@ -2,6 +2,7 @@
 {
     public class CommonConstants
     {
+        public const int MainFooterID = 2;
         public const string Staff = "Staff";
         public const string Fulltime = "Full-time";
         public const string Parttime = "Part-time";

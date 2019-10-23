@@ -64,7 +64,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                 Department department = new Department();
                 department.UpdateDepartment(departmentViewModel);
                 department.CreatedDate = DateTime.Now;
-                //department.CreatedBy = currentUserName;
+                department.CreatedBy = currentUserName;
                 TryValidateModel(department);
                 if (ModelState.IsValid)
                 {
@@ -73,7 +73,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                     return Json(new
                     {
                         status = true,
-                        message = "Create " + department.Name + " successfully"
+                        message = "Create " + department.Name + " departments successfully"
                     });
                 }
                 else
@@ -90,7 +90,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                 var updatedDepartment = _departmentService.GetById(departmentViewModel.ID);
                 updatedDepartment.UpdateDepartment(departmentViewModel);
                 updatedDepartment.UpdatedDate = DateTime.Now;
-                //updatedDepartment.UpdatedBy = currentUserName;
+                updatedDepartment.UpdatedBy = currentUserName;
                 TryValidateModel(updatedDepartment);
                 if (ModelState.IsValid)
                 {
@@ -152,7 +152,7 @@ namespace IUR.Web.Areas.Admin.Controllers
             _departmentService.SaveChanges();
             return Json(new
             {
-                message = "Delete " + countDelete + " successfully",
+                message = "Delete " + countDelete + " departments successfully",
                 status = true
             });
         }
@@ -163,7 +163,7 @@ namespace IUR.Web.Areas.Admin.Controllers
             var department = _departmentService.GetById(id);
             department.Status = !department.Status;
             department.UpdatedDate = DateTime.Now;
-            //department.UpdatedBy = currentUserName;
+            department.UpdatedBy = currentUserName;
             _departmentService.Update(department);
             _departmentService.SaveChanges();
             return Json(new

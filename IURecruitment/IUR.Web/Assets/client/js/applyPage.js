@@ -6,48 +6,114 @@
         $('#addEduBG').off('click').on('click', function (e) {
             e.preventDefault();
             var tbody = $('#CO_rows');
-            tbody.append('<tr><td><select class="form-control" name="EducationBackground.Level"><option>PhD</option><option>Master</option><option>Bachelor</option><option>Diploma</option></select></td ><td><input type="text" class="form-control" name="EducationBackground.School" /></td><td><input type="text" class="form-control" name="EducationBackground.Country" /></td><td><input type="text" class="form-control" name="EduBackGround.Major" /></td><td><input type="date" class="form-control" name="EducationBackground.GraduatedDate" /></td></tr>');
+            tbody.append(`
+                <tr>
+                    <td>
+                        <select class="form-control" name="EducationBackgroundVm.Level">
+                            <option>PhD</option>
+                            <option>Master</option>
+                            <option>Bachelor</option>
+                            <option>Diploma</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="EducationBackgroundVm.School" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="EducationBackgroundVm.Country" />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="EducationBackgroundVm.Major" />
+                    </td>
+                    <td>
+                        <input type="date" class="form-control" name="EducationBackgroundVm.GraduatedDate" />
+                    </td>
+                </tr>`);
         });
 
         $('#addLanguage').off('click').on('click', function (e) {
             e.preventDefault();
             var tbody = $('#language_rows');
-            tbody.append('<tr><td><input type="text" name="Language.Certificate" class="form-control" placeholder="IELTS, TOELF, ..."/></td ><td><input type="text" class="form-control" name="Language.Grade" /></td></tr>');
+            tbody.append(`<tr>
+                            <td>
+                                <input type="text" name="Language.Certificate" class="form-control" placeholder="IELTS, TOELF, ..."/>
+                            </td >
+                            <td>
+                                <input type="text" class="form-control" name="Language.Level" />
+                            </td>
+                         </tr>`);
         });
 
         $('#addCompskill').off('click').on('click', function (e) {
             e.preventDefault();
             var tbody = $('#compskill_rows');
-            tbody.append('<tr><td><input type="text" name="ComputerSkill.Software" class="form-control" placeholder="Microsoft Office, Photoshop, SPSS softwares, ..." /></td ><td><select class="form-control" name="ComputerSkill.Level"><option>Please Select</option><option>Basic</option><option>Intermediate</option><option>Advanced</option></select ></td></tr>');
+            tbody.append(`<tr>
+                            <td>
+                                <input type="text" name="ComputerSkill.Software" class="form-control" placeholder="Microsoft Office, Photoshop, SPSS softwares, ..." />
+                            </td >
+                            <td>
+                                <select class="form-control" name="ComputerSkill.Level">
+                                    <option>Please Select</option>
+                                     <option>Basic</option>
+                                    <option>Intermediate</option>
+                                     <option>Advanced</option>
+                            </select >
+                            </td>
+                         </tr>`);
         });
 
         $('#addOtherskill').off('click').on('click', function (e) {
             e.preventDefault();
             var tbody = $('#otherskill_rows');
-            tbody.append('<tr><td><input type="text" name="OtherSkill.Skill" class="form-control" placeholder="Soft skills, ..." /></td ><td><input type="text" name="OtherSkill.Reference" class="form-control" placeholder="" /></td></tr>');
+            tbody.append(`<tr>
+                            <td>
+                                <input type="text" name="OtherSkill.Skill" class="form-control" placeholder="Soft skills, ..." />
+                            </td>
+                            <td>
+                                <input type="text" name="OtherSkill.Reference" class="form-control" placeholder="" />
+                            </td>
+                         </tr>`);
         });
 
         $('#addEmHis').off('click').on('click', function (e) {
             e.preventDefault();
             var tbody = $('#emhis_rows');
-            tbody.append('<tr><td><input type ="date" class="form-control" name="Experience.FromDate" /></td><td><input type="date" class="form-control" name="Experience.ToDate"/></td><td><input type="text" class="form-control" name="Experience.Company" /></td><td><input type="text" class="form-control" name="Experience.Position" /></td><td><textarea class="form-control" name="Experience.Description"></textarea></td><td><textarea class="form-control" name="Experience.Reason"></textarea></td></tr>');
+            tbody.append(`<tr>
+                            <td>
+                                <input type ="date" class="form-control" name="EmploymentHistory.FromDate" />
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" name="EmploymentHistory.ToDate"/>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="EmploymentHistory.Company" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="EmploymentHistory.Position" />
+                            </td>
+                            <td>
+                                <textarea class="form-control" name="EmploymentHistory.Description"></textarea>
+                            </td>
+                            <td>
+                                <textarea class="form-control" name="EmploymentHistory.LeavingReason"></textarea>
+                            </td>
+                         </tr>`);
         });
 
-        $('.txtimageFile').on('change', function () {
+        $('#filePhoto').on('change', function () {
             var file = $(this).val();
             var ext = file.split(".");
             ext = ext[ext.length - 1].toLowerCase();
             if (ext != "") {
                 var arrayExtensions = ["jpg", "jpeg", "png", "gif"];
-
                 if (arrayExtensions.lastIndexOf(ext) == -1) {
-                    bootbox.alert("Please input a valid file.");
-                    $(".txtimageFile").val("");
+                    bootbox.alert("Please input a valid photo.");
+                    $("#filePhoto").val("");
                 }
             }
         });
 
-        $('.txtresumeFile').on('change', function () {
+        $('#fileResume').on('change', function () {
             var file = $(this).val();
             var ext = file.split(".");
             ext = ext[ext.length - 1].toLowerCase();
@@ -55,8 +121,8 @@
                 var arrayExtensions = ["pdf"];
 
                 if (arrayExtensions.lastIndexOf(ext) == -1) {
-                    bootbox.alert("Please input a valid file.");
-                    $(".txtresumeFile").val("");
+                    bootbox.alert("Please input a valid resume.");
+                    $("#fileResume").val("");
                 }
             }
         });
@@ -142,18 +208,18 @@
                 $('#warning-issuedPlace').text("Please enter issued place.");
                 validated = false;
             }
-
-            if ($('#sltAvailable').val() == "Please Select") {
+            
+            if ($('#sltAvailable').val() == "") {
                 $('#sltAvailable').addClass("invalidate-input");
                 validated = false;
             }
                         
-            if ($('#sltInformed').val() == "Please Select") {
+            if ($('#sltInformed').val() == "") {
                 $('#sltInformed').addClass("invalidate-input");
                 validated = false;
             }
 
-            if ($('#sltAppliedIU').val() == "Please Select") {
+            if ($('#sltAppliedIU').val() == "") {
                 $('#sltAppliedIU').addClass("invalidate-input");
                 validated = false;
             }
@@ -168,7 +234,7 @@
                 $('#myForm').submit();
             }
             else {
-                $('#txtFullname').focus();
+                bootbox.alert("Please fill the form with valid inputs");
             }
         });
     }

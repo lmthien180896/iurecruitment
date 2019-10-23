@@ -18,10 +18,9 @@ namespace IUR.Model.Models
         public string Fullname { get; set; }
 
         [Required]
-        [MaxLength(5)]
+        [MaxLength(256)]
         public string Title { get; set; }
-
-        [Required]
+ 
         public DateTime DOB { get; set; }
 
         [Required]
@@ -51,8 +50,7 @@ namespace IUR.Model.Models
         [Required]
         [MaxLength(256)]
         public string IDCard { get; set; }
-
-        [Required]
+     
         public DateTime IssuedDate { get; set; }
 
         [Required]
@@ -75,11 +73,12 @@ namespace IUR.Model.Models
 
         public virtual IEnumerable<Language> Languages { set; get; }
 
-        public int OtherQuestionId { get; set; }
         public virtual OtherQuestion OtherQuestion { set; get; }
 
         public virtual IEnumerable<OtherSkill> OtherSkills { set; get; }
        
+        public virtual Rank Rank { set; get; }
+
         public virtual Resume Resume { set; get; }
     }
 }

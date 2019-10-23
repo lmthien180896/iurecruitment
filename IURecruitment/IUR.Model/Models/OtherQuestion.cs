@@ -9,12 +9,17 @@ namespace IUR.Model.Models
         [ForeignKey("ApplicantDetail")]
         public int ID { get; set; }        
 
+        [Required]
         [MaxLength(256)]
         public string Available { get; set; }
 
-        public bool IsApplied { get; set; }
+        [Required]
+        [MaxLength(256)]
+        public string IsApplied { get; set; }
 
-        public bool IsInformed { get; set; }
+        [MaxLength(256)]
+        [Required]
+        public string IsInformed { get; set; }
 
         public virtual ApplicantDetail ApplicantDetail { set; get; }
     }

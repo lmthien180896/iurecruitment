@@ -57,6 +57,10 @@
     <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="CKFinder, Version=2.4.0.2631, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\CKFinder.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -135,10 +139,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\JobController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Admin\Models\ApplicationTableViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Admin\Models\LoginViewModel.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -150,16 +159,31 @@
     <Compile Include="Infrastructure\Core\PaginationSet.cs" />
     <Compile Include="Infrastructure\Extensions\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\ApplicantJobViewModel.cs" />
+    <Compile Include="Models\ApplicantDetailViewModel.cs" />
     <Compile Include="Models\ApplicationViewModel.cs" />
+    <Compile Include="Models\ComputerSkillViewModel.cs" />
     <Compile Include="Models\DepartmentViewModel.cs" />
+    <Compile Include="Models\EducationBackgroundViewModel.cs" />
+    <Compile Include="Models\EmploymentHistoryViewModel.cs" />
+    <Compile Include="Models\FooterViewModel.cs" />
     <Compile Include="Models\JobListingViewModel.cs" />
     <Compile Include="Models\JobViewModel.cs" />
+    <Compile Include="Models\LanguageViewModel.cs" />
+    <Compile Include="Models\OtherQuestionViewModel.cs" />
+    <Compile Include="Models\OtherSkillViewModel.cs" />
+    <Compile Include="Models\ResumeViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\admin\js\changePasswordView.js" />
     <Content Include="Assets\admin\js\common.js" />
+    <Content Include="Assets\admin\js\controller\applicationController.js" />
     <Content Include="Assets\admin\js\controller\departmentController.js" />
+    <Content Include="Assets\admin\js\controller\footerController.js" />
     <Content Include="Assets\admin\js\controller\jobController.js" />
+    <Content Include="Assets\admin\js\controller\userController.js" />
     <Content Include="Assets\admin\js\plugins\bootbox.min.js" />
     <Content Include="Assets\admin\js\plugins\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Assets\admin\js\plugins\bootstrap\dist\css\bootstrap-theme.min.css" />
@@ -754,10 +778,13 @@
     <Content Include="Assets\admin\Login_v14\vendor\select2\select2.js" />
     <Content Include="Assets\admin\Login_v14\vendor\select2\select2.min.css" />
     <Content Include="Assets\admin\Login_v14\vendor\select2\select2.min.js" />
+    <Content Include="Assets\admin\mail_templates\confirm_sending_application.html" />
     <Content Include="Assets\client\css\style.css" />
+    <Content Include="Assets\client\img\default-user.png" />
     <Content Include="Assets\client\img\icon_pdf.png" />
     <Content Include="Assets\client\img\IULogo.png" />
     <Content Include="Assets\client\js\applyPage.js" />
+    <Content Include="Assets\client\js\common.js" />
     <Content Include="Assets\client\js\navbar.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1075,9 +1102,17 @@
     <Content Include="Assets\admin\js\plugins\toastr\toastr.less" />
     <Content Include="Assets\admin\js\plugins\toastr\toastr.scss" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Job\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Application\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Application\ViewApplicant.cshtml" />
+    <Content Include="AppSettings.config" />
+    <Content Include="ConnectionString.config" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ChangePasswordView.cshtml" />
+    <Content Include="Areas\Admin\Views\Common\Footer.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Libs\CKFinder.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -1113,10 +1148,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Areas\Admin\Views\Default\" />
     <Folder Include="Assets\admin\css\" />
     <Folder Include="Assets\admin\img\" />
-    <Folder Include="UploadedFiles\" />
+    <Folder Include="UploadedFiles\ApplicantPhoto\" />
+    <Folder Include="UploadedFiles\Resume\" />
+    <Folder Include="Views\footer\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IUR.Common\IUR.Common.csproj">

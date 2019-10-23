@@ -58,7 +58,6 @@
     <Compile Include="Abstract\IAuditable.cs" />
     <Compile Include="Models\ApplicantDetail.cs" />
     <Compile Include="Models\ApplicantJob.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\CareerObjective.cs" />
     <Compile Include="Models\ComputerSkill.cs" />
     <Compile Include="Models\Department.cs" />
@@ -73,9 +72,11 @@
     <Compile Include="Models\OtherQuestion.cs" />
     <Compile Include="Models\OtherSkill.cs" />
     <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Resume.cs" />
     <Compile Include="Models\SupportOnline.cs" />
     <Compile Include="Models\SystemConfig.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\VisitorStatistic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

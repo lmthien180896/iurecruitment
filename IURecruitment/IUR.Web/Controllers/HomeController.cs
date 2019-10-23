@@ -1,4 +1,9 @@
-﻿using IUR.Controllers;
+﻿using AutoMapper;
+using IUR.Common;
+using IUR.Controllers;
+using IUR.Model.Models;
+using IUR.Service;
+using IUR.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +14,11 @@ namespace IUR.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        ICommonService _commonService;
+        public HomeController(ICommonService commonService) {
+            this._commonService = commonService;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -28,7 +38,9 @@ namespace IUR.Web.Controllers
         [ChildActionOnly]
         public ActionResult Footer()
         {
-            return PartialView();
+            var footer = _commonService.GetFooterById(CommonConstants.MainFooterID);
+            var footerVm = Mapper.Map<Footer, FooterViewModel>(footer);
+            return PartialView(footerVm);
         }
     }
 }

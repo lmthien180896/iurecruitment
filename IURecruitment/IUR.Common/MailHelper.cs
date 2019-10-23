@@ -2,7 +2,7 @@
 
 namespace IUR.Common
 {
-    public class MailHepler
+    public class MailHelper
     {
         public static bool SendMail(string toEmail, string subject, string content)
         {

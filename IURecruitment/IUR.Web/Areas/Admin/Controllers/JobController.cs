@@ -12,7 +12,7 @@ using System.Web.Script.Serialization;
 
 namespace IUR.Web.Areas.Admin.Controllers
 {
-    public class JobController : Controller
+    public class JobController : BaseController
     {
         IJobService _jobService;
         IDepartmentService _departmentService;
@@ -78,7 +78,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                 Job job = new Job();
                 job.UpdateJob(jobViewModel);
                 job.CreatedDate = DateTime.Now;
-                //job.CreatedBy = currentUserName;
+                job.CreatedBy = currentUserName;
                 TryValidateModel(job);
                 if (ModelState.IsValid)
                 {
@@ -89,7 +89,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                         return Json(new
                         {
                             status = true,
-                            message = "Create " + job.Name + " successfully"
+                            message = "Create " + job.Name + " jobs successfully"
                         });
                     }
                     catch {
@@ -114,7 +114,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                 var updatedJob = _jobService.GetById(jobViewModel.ID);
                 updatedJob.UpdateJob(jobViewModel);
                 updatedJob.UpdatedDate = DateTime.Now;
-                //updatedJob.UpdatedBy = currentUserName;
+                updatedJob.UpdatedBy = currentUserName;
                 TryValidateModel(updatedJob);
                 if (ModelState.IsValid)
                 {
@@ -199,7 +199,7 @@ namespace IUR.Web.Areas.Admin.Controllers
             var job = _jobService.GetById(id);
             job.Status = !job.Status;
             job.UpdatedDate = DateTime.Now;
-            //job.UpdatedBy = currentUserName;
+            job.UpdatedBy = currentUserName;
             _jobService.Update(job);
             _jobService.SaveChanges();
             return Json(new

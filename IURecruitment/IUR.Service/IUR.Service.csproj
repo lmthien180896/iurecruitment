@@ -41,11 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicantService.cs" />
+    <Compile Include="ApplicantDetailService.cs" />
+    <Compile Include="ApplicantJobService.cs" />
+    <Compile Include="CareerObjectiveService.cs" />
     <Compile Include="CommonService.cs" />
+    <Compile Include="ComputerSkillService.cs" />
     <Compile Include="DepartmentService.cs" />
+    <Compile Include="EducationBackgroundService.cs" />
+    <Compile Include="EmploymentHistoryService.cs" />
     <Compile Include="JobService.cs" />
+    <Compile Include="LanguageService.cs" />
+    <Compile Include="OtherQuestionService.cs" />
+    <Compile Include="OtherSkillService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RankService.cs" />
+    <Compile Include="ResumeService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IUR.Common\IUR.Common.csproj">

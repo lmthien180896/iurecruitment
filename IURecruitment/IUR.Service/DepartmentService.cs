@@ -48,7 +48,7 @@ namespace IUR.Service
         public Department Delete(int id)
         {
             var department = _departmentRepository.Delete(id);
-            _jobService.DeleteMultiById(id);
+            _jobService.DeleteMultiByDepartmentId(id);
             return department;
         }
 

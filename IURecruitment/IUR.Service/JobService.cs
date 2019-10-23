@@ -18,7 +18,7 @@ namespace IUR.Service
 
         Job Delete(int id);
 
-        void DeleteMultiById(int id);
+        void DeleteMultiByDepartmentId(int id);
 
         IEnumerable<Job> GetAllManagementAndStaffJobs();
         IEnumerable<Job> GetAllFullTimeJobs();
@@ -54,7 +54,7 @@ namespace IUR.Service
             return _jobRepository.Delete(id);
         }
 
-        public void DeleteMultiById(int id)
+        public void DeleteMultiByDepartmentId(int id)
         {
             _jobRepository.DeleteMulti(x => x.DepartmentID == id);
         }
@@ -66,17 +66,17 @@ namespace IUR.Service
 
         public IEnumerable<Job> GetAllFullTimeJobs()
         {
-            return _jobRepository.GetMulti(x => x.TimeType == CommonConstants.Fulltime && x.Status && x.Deadline < DateTime.Now);
+            return _jobRepository.GetMulti(x => x.TimeType == CommonConstants.Fulltime && x.EmployeeType != CommonConstants.Staff && x.Status && x.Deadline >= DateTime.Now);
         }
 
         public IEnumerable<Job> GetAllManagementAndStaffJobs()
         {
-            return _jobRepository.GetMulti(x => x.TimeType == CommonConstants.Parttime && x.Status && x.Deadline < DateTime.Now);
+            return _jobRepository.GetMulti(x => x.EmployeeType == CommonConstants.Staff && x.Status && x.Deadline >= DateTime.Now);
         }
 
         public IEnumerable<Job> GetAllPartTimeJobs()
         {
-            throw new NotImplementedException();
+            return _jobRepository.GetMulti(x => x.TimeType == CommonConstants.Parttime && x.Status && x.Deadline >= DateTime.Now);
         }
 
         public IEnumerable<Job> GetAllSort(string sortItem)

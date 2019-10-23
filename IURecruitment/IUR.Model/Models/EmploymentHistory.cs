@@ -29,5 +29,8 @@ namespace IUR.Model.Models
 
         [MaxLength(256)]
         public string LeavingReason { get; set; }
+
+        [ForeignKey("ApplicantID")]
+        public virtual ApplicantDetail ApplicantDetail { set; get; }
     }
 }

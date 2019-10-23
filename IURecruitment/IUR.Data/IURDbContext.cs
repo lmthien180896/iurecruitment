@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IUR.Data
 {
-    public class IURDbContext : IdentityDbContext<ApplicationUser>
+    public class IURDbContext : DbContext
     {
         public IURDbContext() : base("IURConnection")
         {
@@ -31,6 +31,8 @@ namespace IUR.Data
         public DbSet<VisitorStatistic> VisitorStatistics { get; set; }
         public DbSet<ApplicantJob> ApplicantJobs { get; set; }
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<Rank> Ranks { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         public static IURDbContext Create()
@@ -39,10 +41,7 @@ namespace IUR.Data
         }
 
         protected override void OnModelCreating(DbModelBuilder builder)
-        {
-            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
-            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
-                     
+        {            
         }
     }
 }
