@@ -1,11 +1,7 @@
 ﻿using IUR.Data.Infrastructure;
 using IUR.Data.Repositories;
 using IUR.Model.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IUR.Service
 {
@@ -21,7 +17,6 @@ namespace IUR.Service
 
         IEnumerable<ApplicantDetail> GetAll();
 
-
         void Update(ApplicantDetail applicantDetail);
 
         void SaveChanges();
@@ -29,7 +24,7 @@ namespace IUR.Service
 
     public class ApplicantDetailService : IApplicantDetailService
     {
-        private IApplicantDetailRepository _applicantDetailRepository;        
+        private IApplicantDetailRepository _applicantDetailRepository;
         private IUnitOfWork _unitOfWork;
 
         public ApplicantDetailService(IApplicantDetailRepository applicantDetailRepository, IUnitOfWork unitOfWork)

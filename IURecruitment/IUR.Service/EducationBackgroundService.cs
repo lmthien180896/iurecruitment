@@ -1,11 +1,7 @@
 ﻿using IUR.Data.Infrastructure;
 using IUR.Data.Repositories;
 using IUR.Model.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IUR.Service
 {
@@ -51,7 +47,7 @@ namespace IUR.Service
 
         public void DeleteByApplicantId(int applicantId)
         {
-            _educationBackgroundRepository.DeleteMulti(x => x.ApplicantID == applicantId);   
+            _educationBackgroundRepository.DeleteMulti(x => x.ApplicantID == applicantId);
         }
 
         public IEnumerable<EducationBackground> GetAll()
@@ -80,5 +76,3 @@ namespace IUR.Service
         }
     }
 }
-
-

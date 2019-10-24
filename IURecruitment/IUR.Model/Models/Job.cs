@@ -1,11 +1,7 @@
 ﻿using IUR.Model.Abstract;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IUR.Model.Models
 {
@@ -31,10 +27,10 @@ namespace IUR.Model.Models
         [Required]
         public int DepartmentID { get; set; }
 
-        [Required]        
+        [Required]
         public string Description { get; set; }
 
-        [Required]        
+        [Required]
         public string Requirement { get; set; }
 
         [Required]

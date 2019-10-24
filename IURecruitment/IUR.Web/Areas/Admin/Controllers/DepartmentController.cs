@@ -6,7 +6,6 @@ using IUR.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -14,7 +13,7 @@ namespace IUR.Web.Areas.Admin.Controllers
 {
     public class DepartmentController : BaseController
     {
-        IDepartmentService _departmentService;
+        private IDepartmentService _departmentService;
 
         public DepartmentController(IDepartmentService departmentService)
         {
@@ -39,7 +38,6 @@ namespace IUR.Web.Areas.Admin.Controllers
                 totalRow = totalRow,
                 status = true
             }, JsonRequestBehavior.AllowGet);
-
         }
 
         [HttpGet]
@@ -81,7 +79,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                     return Json(new
                     {
                         status = false,
-                         message = "ModelState is not valid"
+                        message = "ModelState is not valid"
                     });
                 }
             }

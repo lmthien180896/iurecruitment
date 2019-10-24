@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using IUR.Common;
+﻿using IUR.Common;
 using IUR.Controllers;
 using IUR.Model.Models;
 using IUR.Service;
@@ -7,7 +6,6 @@ using IUR.Web.Infrastructure.Extensions;
 using IUR.Web.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,19 +14,19 @@ namespace IUR.Web.Controllers
 {
     public class ApplicationController : BaseController
     {
-        IJobService _jobService;
-        IDepartmentService _departmentService;
-        IApplicantDetailService _applicantDetailService;
-        IApplicantJobService _applicantJobService;
-        ICareerObjectiveService _careerObjectiveService;
-        IEducationBackgroundService _educationBackgroundService;
-        IRankService _rankService;
-        ILanguageService _languageService;
-        IComputerSkillService _computerSkillService;
-        IOtherSkillService _otherSkillService;
-        IEmploymentHistoryService _employmentHistoryService;
-        IOtherQuestionService _otherQuestionService;
-        IResumeService _resumeService;
+        private IJobService _jobService;
+        private IDepartmentService _departmentService;
+        private IApplicantDetailService _applicantDetailService;
+        private IApplicantJobService _applicantJobService;
+        private ICareerObjectiveService _careerObjectiveService;
+        private IEducationBackgroundService _educationBackgroundService;
+        private IRankService _rankService;
+        private ILanguageService _languageService;
+        private IComputerSkillService _computerSkillService;
+        private IOtherSkillService _otherSkillService;
+        private IEmploymentHistoryService _employmentHistoryService;
+        private IOtherQuestionService _otherQuestionService;
+        private IResumeService _resumeService;
 
         public ApplicationController(IResumeService resumeService, IOtherQuestionService otherQuestionService, IEmploymentHistoryService employmentHistoryService, IOtherSkillService otherSkillService, IComputerSkillService computerSkillService, ILanguageService languageService, IRankService rankService, IEducationBackgroundService educationBackgroundService, ICareerObjectiveService careerObjectiveService, IApplicantJobService applicantJobService, IJobService jobService, IDepartmentService departmentService, IApplicantDetailService applicantDetailService)
         {
@@ -137,7 +135,7 @@ namespace IUR.Web.Controllers
             }
             else
             {
-                DeleteApplicant(applicantID);              
+                DeleteApplicant(applicantID);
                 return -1;
             }
         }
@@ -156,30 +154,30 @@ namespace IUR.Web.Controllers
             }
             else
             {
-                DeleteApplicant(applicantID);              
+                DeleteApplicant(applicantID);
                 return -1;
             }
         }
 
         public int AddEducationBackground(int applicantID, List<EducationBackground> listEducationBackground)
         {
-            var id = 0;            
+            var id = 0;
             foreach (var educationBackground in listEducationBackground)
             {
                 educationBackground.ApplicantID = applicantID;
-                TryValidateModel(educationBackground);                
+                TryValidateModel(educationBackground);
                 if (ModelState.IsValid)
                 {
                     var newEducationBackground = _educationBackgroundService.Add(educationBackground);
                     _educationBackgroundService.SaveChanges();
-                    id = newEducationBackground.ID;                 
+                    id = newEducationBackground.ID;
                 }
                 else
                 {
-                    DeleteApplicant(applicantID);           
+                    DeleteApplicant(applicantID);
                     id = -1;
                     break;
-                }                
+                }
             }
 
             return id;
@@ -198,7 +196,7 @@ namespace IUR.Web.Controllers
             }
             else
             {
-                DeleteApplicant(applicantID);               
+                DeleteApplicant(applicantID);
                 return -1;
             }
         }
@@ -328,7 +326,7 @@ namespace IUR.Web.Controllers
             if (extension == ".pdf")
             {
                 string PdfFileName = System.IO.Path.GetFileName(fileResume.FileName);
-                physicalPath = Server.MapPath("~/UploadedFiles/Resume/" + PdfFileName);                
+                physicalPath = Server.MapPath("~/UploadedFiles/Resume/" + PdfFileName);
                 resume.ResumeUrl = "/UploadedFiles/Resume/" + PdfFileName;
             }
             else
@@ -389,17 +387,23 @@ namespace IUR.Web.Controllers
             var listEduCountry = Request.Form.GetValues("EducationBackgroundVm.Country");
             var listEduMajor = Request.Form.GetValues("EducationBackgroundVm.Major");
             var listEduGraduatedDate = Request.Form.GetValues("EducationBackgroundVm.GraduatedDate");
-            if (!listEduSchool.Contains("") && !listEduCountry.Contains("") && !listEduMajor.Contains("") && !listEduGraduatedDate.Contains("")) // Nếu applicant điền vào mục Education Background
+            for (int i = 0; i < listEduLevel.Count(); i++)
             {
-                for (int i = 0; i < listEduLevel.Count(); i++)
+                if (!string.IsNullOrEmpty(listEduSchool[i]) && !string.IsNullOrEmpty(listEduCountry[i]) && !string.IsNullOrEmpty(listEduMajor[i])) // Nếu applicant điền vào mục Education Background
                 {
-                    EducationBackground educationBackground = new EducationBackground();
-                    educationBackground.Level = listEduLevel[i];
-                    educationBackground.School = listEduSchool[i];
-                    educationBackground.Country = listEduCountry[i];
-                    educationBackground.Major = listEduMajor[i];
-                    educationBackground.GraduatedDate = DateTime.ParseExact(listEduGraduatedDate[i], "yyyy-MM-dd", null);
-                    listEducationBacground.Add(educationBackground);
+                    try
+                    {
+                        EducationBackground educationBackground = new EducationBackground();
+                        educationBackground.Level = listEduLevel[i];
+                        educationBackground.School = listEduSchool[i];
+                        educationBackground.Country = listEduCountry[i];
+                        educationBackground.Major = listEduMajor[i];
+                        educationBackground.GraduatedDate = DateTime.ParseExact(listEduGraduatedDate[i], "yyyy-MM-dd", null);
+                        listEducationBacground.Add(educationBackground);
+                    }
+                    catch
+                    {
+                    }
                 }
             }
             var educationBackgroundID = AddEducationBackground(applicantID, listEducationBacground);
@@ -417,14 +421,14 @@ namespace IUR.Web.Controllers
             List<Language> listLanguage = new List<Language>();
             var listLanguageCertificate = Request.Form.GetValues("Language.Certificate");
             var listLanguageLevel = Request.Form.GetValues("Language.Level");
-            if (!listLanguageCertificate.Contains("") && !listLanguageLevel.Contains(""))
+            for (int i = 0; i < listLanguageCertificate.Length; i++)
             {
-                for (int i = 0; i < listLanguageCertificate.Length; i++)
+                if (!string.IsNullOrEmpty(listLanguageCertificate[i]) && !string.IsNullOrEmpty(listLanguageLevel[i]))
                 {
                     Language language = new Language();
                     language.Certificate = listLanguageCertificate[i];
                     language.Level = listLanguageLevel[i];
-                    listLanguage.Add(language);                    
+                    listLanguage.Add(language);
                 }
             }
             var newLanguageID = AddLanguage(applicantID, listLanguage);
@@ -436,9 +440,9 @@ namespace IUR.Web.Controllers
             List<ComputerSkill> listComputerSkill = new List<ComputerSkill>();
             var ListComputerSkillSoftware = Request.Form.GetValues("ComputerSkill.Software");
             var ListComputerSkillLevel = Request.Form.GetValues("ComputerSkill.Level");
-            if (!ListComputerSkillSoftware.Contains("") && !ListComputerSkillLevel.Contains(""))
+            for (int i = 0; i < ListComputerSkillSoftware.Length; i++)
             {
-                for (int i = 0; i < ListComputerSkillSoftware.Length; i++)
+                if (!string.IsNullOrEmpty(ListComputerSkillSoftware[i]) && !string.IsNullOrEmpty(ListComputerSkillLevel[i]))
                 {
                     ComputerSkill computerSkill = new ComputerSkill();
                     computerSkill.Software = ListComputerSkillSoftware[i];
@@ -455,9 +459,9 @@ namespace IUR.Web.Controllers
             List<OtherSkill> listOtherSkill = new List<OtherSkill>();
             var listSkill = Request.Form.GetValues("OtherSkill.Skill");
             var listOtherSkillReference = Request.Form.GetValues("OtherSkill.Reference");
-            if (!listSkill.Contains("") && !listOtherSkillReference.Contains(""))
+            for (int i = 0; i < listSkill.Length; i++)
             {
-                for (int i = 0; i < listSkill.Length; i++)
+                if (!string.IsNullOrEmpty(listSkill[i]) && !string.IsNullOrEmpty(listOtherSkillReference[i]))
                 {
                     OtherSkill otherSkill = new OtherSkill();
                     otherSkill.Skill = listSkill[i];
@@ -478,18 +482,22 @@ namespace IUR.Web.Controllers
             var ListEmploymentHistoryPosition = Request.Form.GetValues("EmploymentHistory.Position");
             var ListEmploymentHistoryDescription = Request.Form.GetValues("EmploymentHistory.Description");
             var ListEmploymentHistoryLeavingReason = Request.Form.GetValues("EmploymentHistory.LeavingReason");
-            if (!ListEmploymentHistoryFromDate.Contains("") && !ListEmploymentHistoryToDate.Contains("") && !ListEmploymentHistoryCompany.Contains("") && !ListEmploymentHistoryPosition.Contains("") && !ListEmploymentHistoryDescription.Contains("") && !ListEmploymentHistoryLeavingReason.Contains(""))
+            for (int i = 0; i < ListEmploymentHistoryCompany.Length; i++)
             {
-                for (int i = 0; i < ListEmploymentHistoryCompany.Length; i++)
+                if (!string.IsNullOrEmpty(ListEmploymentHistoryCompany[i]) && !string.IsNullOrEmpty(ListEmploymentHistoryPosition[i]) && !string.IsNullOrEmpty(ListEmploymentHistoryDescription[i]) && !string.IsNullOrEmpty(ListEmploymentHistoryLeavingReason[i]))
                 {
-                    EmploymentHistory employmentHistory = new EmploymentHistory();
-                    employmentHistory.FromDate = DateTime.ParseExact(ListEmploymentHistoryFromDate[i], "yyyy-MM-dd", null);
-                    employmentHistory.ToDate = DateTime.ParseExact(ListEmploymentHistoryToDate[i], "yyyy-MM-dd", null);
-                    employmentHistory.Company = ListEmploymentHistoryCompany[i];
-                    employmentHistory.Position = ListEmploymentHistoryPosition[i];
-                    employmentHistory.Description = ListEmploymentHistoryDescription[i];
-                    employmentHistory.LeavingReason = ListEmploymentHistoryLeavingReason[i];
-                    listEmploymentHistory.Add(employmentHistory);
+                    try
+                    {
+                        EmploymentHistory employmentHistory = new EmploymentHistory();
+                        employmentHistory.FromDate = DateTime.ParseExact(ListEmploymentHistoryFromDate[i], "yyyy-MM-dd", null);
+                        employmentHistory.ToDate = DateTime.ParseExact(ListEmploymentHistoryToDate[i], "yyyy-MM-dd", null);
+                        employmentHistory.Company = ListEmploymentHistoryCompany[i];
+                        employmentHistory.Position = ListEmploymentHistoryPosition[i];
+                        employmentHistory.Description = ListEmploymentHistoryDescription[i];
+                        employmentHistory.LeavingReason = ListEmploymentHistoryLeavingReason[i];
+                        listEmploymentHistory.Add(employmentHistory);
+                    }
+                    catch { }
                 }
             }
             var newEmploymentHistoryID = AddEmploymentHistory(applicantID, listEmploymentHistory);

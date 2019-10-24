@@ -6,7 +6,6 @@ using IUR.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -14,8 +13,8 @@ namespace IUR.Web.Areas.Admin.Controllers
 {
     public class JobController : BaseController
     {
-        IJobService _jobService;
-        IDepartmentService _departmentService;
+        private IJobService _jobService;
+        private IDepartmentService _departmentService;
 
         public JobController(IJobService jobService, IDepartmentService departmentService)
         {
@@ -30,7 +29,6 @@ namespace IUR.Web.Areas.Admin.Controllers
             ViewBag.listDepartments = listDepartmentVm;
             return View();
         }
-
 
         [HttpGet]
         public JsonResult LoadJobs(string sortItem, int page, int pageSize)
@@ -92,7 +90,8 @@ namespace IUR.Web.Areas.Admin.Controllers
                             message = "Create " + job.Name + " jobs successfully"
                         });
                     }
-                    catch {
+                    catch
+                    {
                         return Json(new
                         {
                             status = false,

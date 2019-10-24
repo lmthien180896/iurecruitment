@@ -3,18 +3,16 @@ using IUR.Controllers;
 using IUR.Model.Models;
 using IUR.Service;
 using IUR.Web.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace IUR.Web.Controllers
 {
     public class JobController : BaseController
     {
-        IJobService _jobService;
-        IDepartmentService _departmentService;
+        private IJobService _jobService;
+        private IDepartmentService _departmentService;
+
         public JobController(IJobService jobService, IDepartmentService departmentService)
         {
             this._jobService = jobService;
@@ -58,6 +56,5 @@ namespace IUR.Web.Controllers
             var jobVm = Mapper.Map<Job, JobViewModel>(job);
             return View(jobVm);
         }
-        
     }
 }

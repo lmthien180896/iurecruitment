@@ -1,11 +1,7 @@
 ﻿using IUR.Data.Infrastructure;
 using IUR.Data.Repositories;
 using IUR.Model.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IUR.Service
 {
@@ -66,5 +62,3 @@ namespace IUR.Service
         }
     }
 }
-
-

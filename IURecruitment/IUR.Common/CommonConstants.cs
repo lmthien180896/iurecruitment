@@ -6,6 +6,6 @@
         public const string Staff = "Staff";
         public const string Fulltime = "Full-time";
         public const string Parttime = "Part-time";
-        public static string USER_SESSION = "USER_SESSION";       
+        public static string USER_SESSION = "USER_SESSION";
     }
 }

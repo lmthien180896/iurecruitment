@@ -5,8 +5,6 @@ using IUR.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IUR.Service
 {
@@ -21,7 +19,9 @@ namespace IUR.Service
         void DeleteMultiByDepartmentId(int id);
 
         IEnumerable<Job> GetAllManagementAndStaffJobs();
+
         IEnumerable<Job> GetAllFullTimeJobs();
+
         IEnumerable<Job> GetAllPartTimeJobs();
 
         IEnumerable<Job> GetAll();

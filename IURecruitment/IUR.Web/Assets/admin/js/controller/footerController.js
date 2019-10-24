@@ -11,7 +11,7 @@ var footerController = {
     registerEvent: function () {
         $('#btnSubmit').off('click').on('click', function () {
             var id = $('#txtID').val();
-            txtContent.updateElement();
+            //txtContent.updateElement();
             var content = $('#txtContent').val();
             var data = {
                 ID: id,

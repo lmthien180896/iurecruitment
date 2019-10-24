@@ -3,10 +3,7 @@ using IUR.Model.Models;
 using IUR.Service;
 using IUR.Web.Areas.Admin.Models;
 using IUR.Web.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -14,19 +11,19 @@ namespace IUR.Web.Areas.Admin.Controllers
 {
     public class ApplicationController : BaseController
     {
-        IJobService _jobService;
-        IDepartmentService _departmentService;
-        IApplicantDetailService _applicantDetailService;
-        IApplicantJobService _applicantJobService;
-        ICareerObjectiveService _careerObjectiveService;
-        IEducationBackgroundService _educationBackgroundService;
-        IRankService _rankService;
-        ILanguageService _languageService;
-        IComputerSkillService _computerSkillService;
-        IOtherSkillService _otherSkillService;
-        IEmploymentHistoryService _employmentHistoryService;
-        IOtherQuestionService _otherQuestionService;
-        IResumeService _resumeService;
+        private IJobService _jobService;
+        private IDepartmentService _departmentService;
+        private IApplicantDetailService _applicantDetailService;
+        private IApplicantJobService _applicantJobService;
+        private ICareerObjectiveService _careerObjectiveService;
+        private IEducationBackgroundService _educationBackgroundService;
+        private IRankService _rankService;
+        private ILanguageService _languageService;
+        private IComputerSkillService _computerSkillService;
+        private IOtherSkillService _otherSkillService;
+        private IEmploymentHistoryService _employmentHistoryService;
+        private IOtherQuestionService _otherQuestionService;
+        private IResumeService _resumeService;
 
         public ApplicationController(IResumeService resumeService, IOtherQuestionService otherQuestionService, IEmploymentHistoryService employmentHistoryService, IOtherSkillService otherSkillService, IComputerSkillService computerSkillService, ILanguageService languageService, IRankService rankService, IEducationBackgroundService educationBackgroundService, ICareerObjectiveService careerObjectiveService, IApplicantJobService applicantJobService, IJobService jobService, IDepartmentService departmentService, IApplicantDetailService applicantDetailService)
         {
@@ -49,7 +46,6 @@ namespace IUR.Web.Areas.Admin.Controllers
         {
             return View();
         }
-
 
         [HttpGet]
         public JsonResult LoadApplications(string sortItem)
@@ -140,7 +136,6 @@ namespace IUR.Web.Areas.Admin.Controllers
             _otherQuestionService.SaveChanges();
             _resumeService.SaveChanges();
             _applicantDetailService.SaveChanges();
-
         }
 
         [HttpPost]

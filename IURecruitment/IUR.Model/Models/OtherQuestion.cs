@@ -7,7 +7,7 @@ namespace IUR.Model.Models
     public class OtherQuestion
     {
         [ForeignKey("ApplicantDetail")]
-        public int ID { get; set; }        
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(256)]

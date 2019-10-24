@@ -4,9 +4,6 @@ using IUR.Model.Models;
 using IUR.Service;
 using IUR.Web.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -14,7 +11,7 @@ namespace IUR.Web.Areas.Admin.Controllers
 {
     public class CommonController : BaseController
     {
-        ICommonService _commonService;
+        private ICommonService _commonService;
 
         public CommonController(ICommonService commonService)
         {
@@ -46,7 +43,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                 SetAlert("Update footer successfully", "success");
                 return Json(new
                 {
-                    status = true                    
+                    status = true
                 });
             }
             else
@@ -56,7 +53,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                     status = true,
                     message = "ModelState is not valid"
                 });
-            }           
+            }
         }
     }
 }

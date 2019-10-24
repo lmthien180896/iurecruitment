@@ -1,10 +1,6 @@
 ﻿using IUR.Common;
 using IUR.Service;
 using IUR.Web.Areas.Admin.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace IUR.Web.Areas.Admin.Controllers
@@ -17,7 +13,7 @@ namespace IUR.Web.Areas.Admin.Controllers
             TempData["AlertType"] = type;
         }
 
-        IUserService _userService;
+        private IUserService _userService;
 
         public LoginController(IUserService userService)
         {
@@ -35,13 +31,13 @@ namespace IUR.Web.Areas.Admin.Controllers
             model.HashedPassword = Encryptor.MD5Hash(model.HashedPassword);
             var userId = _userService.CheckLogin(model.UserName, model.HashedPassword);
             if (userId > 0)
-            {               
+            {
                 var user = _userService.GetById(userId);
                 if (user.Status)
                 {
                     var userSession = new UserLogin();  // tạo user session
                     userSession.UserID = user.ID; // gán userID vào session
-                    userSession.UserName = user.Username; // gán username vào session                    
+                    userSession.UserName = user.Username; // gán username vào session
                     Session.Add(CommonConstants.USER_SESSION, userSession);
                     TempData["isLogin"] = "admin";
                     TempData["DisplayName"] = userSession.UserName;

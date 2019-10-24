@@ -1,10 +1,5 @@
 ﻿using IUR.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace IUR.Controllers
 {
@@ -14,7 +9,7 @@ namespace IUR.Controllers
         {
             var session = (UserLogin)Session[CommonConstants.USER_SESSION]; // Lấy user session và ép kiểu UserLogin
             if (session == null)
-            {            
+            {
                 TempData["isLogin"] = "";
             }
             else
@@ -28,7 +23,7 @@ namespace IUR.Controllers
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;
-            TempData["AlertType"] = type;          
+            TempData["AlertType"] = type;
         }
     }
 }

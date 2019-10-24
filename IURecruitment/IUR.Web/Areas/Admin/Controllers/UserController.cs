@@ -7,8 +7,6 @@ using IUR.Web.Infrastructure.Extensions;
 using IUR.Web.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -16,17 +14,17 @@ namespace IUR.Web.Areas.Admin.Controllers
 {
     public class UserController : BaseController
     {
-        IUserService _userService;
+        private IUserService _userService;
 
         public UserController(IUserService userService)
         {
             this._userService = userService;
         }
-      
+
         public ActionResult ChangePasswordView(string username)
         {
             var currentUser = _userService.GetByUsername(username);
-            ViewBag.UserID = currentUser.ID; 
+            ViewBag.UserID = currentUser.ID;
             return View();
         }
 
@@ -62,7 +60,7 @@ namespace IUR.Web.Areas.Admin.Controllers
             else
             {
                 return Json(new
-                {                   
+                {
                     status = false,
                     message = "Password is incorrected"
                 });
@@ -70,13 +68,13 @@ namespace IUR.Web.Areas.Admin.Controllers
         }
 
         public ActionResult Index()
-        {           
+        {
             return View();
         }
 
         [HttpGet]
         public JsonResult LoadUsers()
-        {            
+        {
             var listUser = _userService.GetAll();
             var listUserVm = Mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(listUser);
             foreach (var user in listUserVm)
@@ -117,7 +115,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                 return Json(new
                 {
                     status = true,
-                    message = "Create "+newUser.Username+" successfully"
+                    message = "Create " + newUser.Username + " successfully"
                 });
             }
             else
@@ -127,7 +125,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                     status = false,
                     message = "ModelState is not valid"
                 });
-            }            
+            }
         }
 
         [HttpPost]
@@ -179,7 +177,7 @@ namespace IUR.Web.Areas.Admin.Controllers
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             UserViewModel userVm = serializer.Deserialize<UserViewModel>(model);
-            
+
             var user = _userService.GetById(userVm.ID);
             user.Phone = userVm.Phone;
             TryValidateModel(user);
@@ -192,16 +190,16 @@ namespace IUR.Web.Areas.Admin.Controllers
                 return Json(new
                 {
                     status = true,
-                    message = "Update user's phone to " +user.Phone+ " successfully"
+                    message = "Update user's phone to " + user.Phone + " successfully"
                 });
             }
             else
             {
                 return Json(new
                 {
-                    status = false,                   
+                    status = false,
                 });
-            }           
+            }
         }
 
         [HttpPost]
@@ -233,7 +231,7 @@ namespace IUR.Web.Areas.Admin.Controllers
                 });
             }
         }
-   
+
         [HttpPost]
         public JsonResult ChangeStatus(int id)
         {

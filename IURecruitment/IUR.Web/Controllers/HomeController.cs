@@ -4,18 +4,16 @@ using IUR.Controllers;
 using IUR.Model.Models;
 using IUR.Service;
 using IUR.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace IUR.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        ICommonService _commonService;
-        public HomeController(ICommonService commonService) {
+        private ICommonService _commonService;
+
+        public HomeController(ICommonService commonService)
+        {
             this._commonService = commonService;
         }
 

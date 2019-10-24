@@ -6,11 +6,11 @@
 
 @section script{
     <script src="~/Assets/admin/js/controller/footerController.js"></script>
-    <script>
+    @*<script>
         var txtContent = CKEDITOR.replace('txtContent', {
             customConfig: '/Assets/admin/js/plugins/ckeditor/config.js',
         });
-    </script>
+    </script>*@
 }
 
 <div class="title-addnew">
@@ -25,7 +25,7 @@
     <div class="form-group">
         <input type="hidden" id="txtID" name="ID" value="@Model.ID" />
         <div class="col-sm-12">
-            <textarea class="form-control" id="txtContent" name="content">@Model.Content</textarea>
+            <textarea class="form-control" id="txtContent" name="content" rows="40">@Model.Content</textarea>
         </div>
     </div>
 </form>

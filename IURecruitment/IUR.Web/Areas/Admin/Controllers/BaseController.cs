@@ -7,6 +7,7 @@ namespace IUR.Web.Areas.Admin.Controllers
     public class BaseController : Controller
     {
         public string currentUserName;
+
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             var session = (UserLogin)Session[CommonConstants.USER_SESSION]; // Lấy user session và ép kiểu UserLogin

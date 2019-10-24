@@ -7,7 +7,7 @@ namespace IUR.Model.Models
     public class Resume
     {
         [ForeignKey("ApplicantDetail")]
-        public int ID { get; set; }      
+        public int ID { get; set; }
 
         [MaxLength(256)]
         public string ResumeUrl { get; set; }
